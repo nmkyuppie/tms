@@ -20,10 +20,10 @@
 <script src="js/parse-1.6.14.js"></script>
 <script src="js/tripdetails.js"></script>
 <script>
-$( function() {
-    $( "#datepicker" ).datepicker();
-  } );
-  </script>
+	$(function() {
+		$("#datepicker").datepicker();
+	});
+</script>
 </head>
 <body>
 	<main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main"> <!-- Modal -->
@@ -41,27 +41,94 @@ $( function() {
 					</button>
 				</div>
 				<div class="modal-body">
-					<form>
+					<form class="p-0">
 						<div class="form-group row">
-							<label for="staticEmail" class="col-sm-4 col-form-label">Trip
+							<label for="datepicker" class="col-sm-4 col-form-label">Trip
 								date</label>
 							<div class="col-sm-6">
-								<input type="text" readonly class="form-control-plaintext"
-									id="staticEmail" value="email@example.com">
-							</div>
-						</div>
-						<div class="form-group row">
-							<label for="inputPassword" class="col-sm-4 col-form-label">Password</label>
-							<div class="col-sm-6">
-								<input type="password" class="form-control" id="inputPassword"
-									placeholder="Password">
-							</div>
-						</div>
-						<div class="form-group row">
-							<label for="inputPassword" class="col-sm-4 col-form-label">date</label>
-							<div class="col-sm-6">
 								<input type="text" class="form-control" id="datepicker"
-									placeholder="Password">
+									placeholder="MM/DD/YYYY">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="route" class="col-sm-4 col-form-label">Route</label>
+							<div class="col-sm-6">
+								<input type="text" class="form-control" id="route"
+									placeholder="Route">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="startingkm" class="col-sm-4 col-form-label">Starting
+								km</label>
+							<div class="col-sm-6">
+								<div class="input-group">
+									<input type="text" class="form-control text-right"
+										placeholder="0" aria-label="startingkm"
+										aria-describedby="startingkm-addon"> <span
+										class="input-group-addon" id="startingkm-addon">km</span>
+								</div>
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="closingkm" class="col-sm-4 col-form-label">Closing
+								km</label>
+							<div class="col-sm-6">
+								<div class="input-group">
+									<input type="text" class="form-control text-right"
+										placeholder="0" aria-label="closingkm"
+										aria-describedby="closingkm-addon"> <span
+										class="input-group-addon" id="closingkm-addon">km</span>
+								</div>
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="totalkm" class="col-sm-4 col-form-label">Total
+								km</label>
+							<div class="col-sm-6">
+								<div class="input-group">
+									<input type="text" class="form-control text-right"
+										placeholder="0" aria-label="totalkm"
+										aria-describedby="totalkm-addon"> <span
+										class="input-group-addon" id="totalkm-addon">km</span>
+								</div>
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="passing" class="col-sm-4 col-form-label">Passing
+							</label>
+							<div class="col-sm-6">
+								<input type="text" class="form-control" id="passing"
+									placeholder="">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="totalkm" class="col-sm-4 col-form-label">Toll
+								count </label>
+							<div class="col-sm-6">
+								<input type="text" class="form-control" id="tollcount"
+									placeholder="0">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="amtperkm" class="col-sm-4 col-form-label">Amount</label>
+							<div class="col-sm-6">
+								<div class="input-group">
+									<span class="input-group-addon">₹</span> <input type="text"
+										class="form-control text-right" placeholder="0"
+										aria-label="amtperkm" aria-describedby="amtperkm-addon">
+									<span class="input-group-addon" id="amtperkm-addon">per
+										km</span>
+								</div>
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="totalamt" class="col-sm-4 col-form-label">Total Amount</label>
+							<div class="col-sm-6">
+								<div class="input-group">
+									<span class="input-group-addon">₹</span> <input type="text"
+										class="form-control text-right" placeholder="0"
+										aria-label="totalamt">
+								</div>
 							</div>
 						</div>
 					</form>
@@ -69,7 +136,7 @@ $( function() {
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary"
 						data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary">Save changes</button>
+					<button type="button" class="btn btn-success">Save changes</button>
 				</div>
 			</div>
 		</div>
@@ -78,11 +145,17 @@ $( function() {
 		<table class="table table-sm table-striped">
 			<thead>
 				<tr>
-					<th>#</th>
-					<th>Date</th>
+					<th></th>
+					<th></th>
+					<th>Trip Date</th>
+					<th>Route</th>
 					<th>Starting KM</th>
 					<th>Closing KM</th>
 					<th>Total KM</th>
+					<th>Passing</th>
+					<th>Toll count</th>
+					<th>₹/km</th>
+					<th>Total ₹</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -92,119 +165,43 @@ $( function() {
 							style="margin-right: 10px;">
 							<i class="material-icons md-18">mode_edit</i>
 						</button>
+					</td>
+					<td>
 						<button type="button" class="btn btn-sm btn-danger float-left">
 							<i class="material-icons md-18">delete</i>
 						</button>
 					</td>
-					<td>Lorem</td>
-					<td>ipsum</td>
-					<td>dolor</td>
-					<td>sit</td>
+					<td>09/02/2017</td>
+					<td>Chennai to Tirupur</td>
+					<td>28900</td>
+					<td>29430</td>
+					<td>530</td>
+					<td>30</td>
+					<td>20</td>
+					<td>16</td>
+					<td>6000</td>
 				</tr>
 				<tr>
-					<td>1,002</td>
-					<td>amet</td>
-					<td>consectetur</td>
-					<td>adipiscing</td>
-					<td>elit</td>
-				</tr>
-				<tr>
-					<td>1,003</td>
-					<td>Integer</td>
-					<td>nec</td>
-					<td>odio</td>
-					<td>Praesent</td>
-				</tr>
-				<tr>
-					<td>1,003</td>
-					<td>libero</td>
-					<td>Sed</td>
-					<td>cursus</td>
-					<td>ante</td>
-				</tr>
-				<tr>
-					<td>1,004</td>
-					<td>dapibus</td>
-					<td>diam</td>
-					<td>Sed</td>
-					<td>nisi</td>
-				</tr>
-				<tr>
-					<td>1,005</td>
-					<td>Nulla</td>
-					<td>quis</td>
-					<td>sem</td>
-					<td>at</td>
-				</tr>
-				<tr>
-					<td>1,006</td>
-					<td>nibh</td>
-					<td>elementum</td>
-					<td>imperdiet</td>
-					<td>Duis</td>
-				</tr>
-				<tr>
-					<td>1,007</td>
-					<td>sagittis</td>
-					<td>ipsum</td>
-					<td>Praesent</td>
-					<td>mauris</td>
-				</tr>
-				<tr>
-					<td>1,008</td>
-					<td>Fusce</td>
-					<td>nec</td>
-					<td>tellus</td>
-					<td>sed</td>
-				</tr>
-				<tr>
-					<td>1,009</td>
-					<td>augue</td>
-					<td>semper</td>
-					<td>porta</td>
-					<td>Mauris</td>
-				</tr>
-				<tr>
-					<td>1,010</td>
-					<td>massa</td>
-					<td>Vestibulum</td>
-					<td>lacinia</td>
-					<td>arcu</td>
-				</tr>
-				<tr>
-					<td>1,011</td>
-					<td>eget</td>
-					<td>nulla</td>
-					<td>Class</td>
-					<td>aptent</td>
-				</tr>
-				<tr>
-					<td>1,012</td>
-					<td>taciti</td>
-					<td>sociosqu</td>
-					<td>ad</td>
-					<td>litora</td>
-				</tr>
-				<tr>
-					<td>1,013</td>
-					<td>torquent</td>
-					<td>per</td>
-					<td>conubia</td>
-					<td>nostra</td>
-				</tr>
-				<tr>
-					<td>1,014</td>
-					<td>per</td>
-					<td>inceptos</td>
-					<td>himenaeos</td>
-					<td>Curabitur</td>
-				</tr>
-				<tr>
-					<td>1,015</td>
-					<td>sodales</td>
-					<td>ligula</td>
-					<td>in</td>
-					<td>libero</td>
+					<td>
+						<button type="button" class="btn btn-sm btn-primary float-left"
+							style="margin-right: 10px;">
+							<i class="material-icons md-18">mode_edit</i>
+						</button>
+					</td>
+					<td>
+						<button type="button" class="btn btn-sm btn-danger float-left">
+							<i class="material-icons md-18">delete</i>
+						</button>
+					</td>
+					<td>09/04/2017</td>
+					<td>Madurai to Karur</td>
+					<td>29600</td>
+					<td>29850</td>
+					<td>250</td>
+					<td>20</td>
+					<td>0</td>
+					<td>16</td>
+					<td>1000</td>
 				</tr>
 			</tbody>
 		</table>

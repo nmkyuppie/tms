@@ -671,3 +671,6 @@
 	height:20px;
 	border:1px dashed #007bff;
 }
+.ui-datepicker-today{
+	background-color: red;
+}
