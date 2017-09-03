@@ -19,6 +19,8 @@ var load=function(hash){
 			if(hash.length>0){
 				hash=hash.substring(1,hash.length);
 				document.getElementById('mainIFrame').src=hash+'.html';
+				removeActiveCSS();
+				$('#'+hash).addClass('active');
 			}
 		}
 		else{
@@ -26,3 +28,24 @@ var load=function(hash){
 		}
 	}
 }
+
+var openAddModal = function(){
+	var iframeSrc=document.getElementById('mainIFrame').src;
+	if(iframeSrc.indexOf('#')!=-1){
+		iframeSrc=iframeSrc.substring(0,iframeSrc.indexOf('#'));	
+		document.getElementById('mainIFrame').src= iframeSrc+'#add';
+	}else{
+		document.getElementById('mainIFrame').src= iframeSrc+'#add';
+	}
+}
+
+var removeActiveCSS = function(){
+	$('#overview').removeClass('active');
+	$('#tripdetails').removeClass('active');
+	$('#vehicleinformation').removeClass('active');
+	$('#dieseldetails').removeClass('active');
+	$('#tyredetails').removeClass('active');
+	$('#driversalarydetails').removeClass('active');
+	$('#vehiclemaintenence').removeClass('active');
+}
+
