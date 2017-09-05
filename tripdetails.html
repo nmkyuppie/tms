@@ -19,8 +19,13 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="js/parse-1.6.14.js"></script>
 <script src="js/tripdetails.js"></script>
+
 <script>
 	$(function() {
+
+	    Parse.initialize("pR2fH1wY2ooB7FDKCyqPnMQckg9bNzQ8uODCilmt","jyNKGC6Ip94D100blbnBqj7WuUeW0cEEH5tv2Yw3");
+	    Parse.serverURL="https://parseapi.back4app.com/";
+	    
 		$("#datepicker").datepicker();
 	});
 </script>
@@ -53,8 +58,15 @@
 						<div class="form-group row">
 							<label for="route" class="col-sm-4 col-form-label">Route</label>
 							<div class="col-sm-6">
-								<input type="text" class="form-control" id="route"
-									placeholder="Route">
+								<input type="text" class="form-control" id="src_route"
+									placeholder="From">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="route" class="col-sm-4 col-form-label"></label>
+							<div class="col-sm-6">
+								<input type="text" class="form-control" id="dest_route"
+									placeholder="To">
 							</div>
 						</div>
 						<div class="form-group row">
@@ -64,7 +76,7 @@
 								<div class="input-group">
 									<input type="text" class="form-control text-right"
 										placeholder="0" aria-label="startingkm"
-										aria-describedby="startingkm-addon"> <span
+										aria-describedby="startingkm-addon" id="startingkm"> <span
 										class="input-group-addon" id="startingkm-addon">km</span>
 								</div>
 							</div>
@@ -75,7 +87,7 @@
 							<div class="col-sm-6">
 								<div class="input-group">
 									<input type="text" class="form-control text-right"
-										placeholder="0" aria-label="closingkm"
+										placeholder="0" aria-label="closingkm" id="closingkm"
 										aria-describedby="closingkm-addon"> <span
 										class="input-group-addon" id="closingkm-addon">km</span>
 								</div>
@@ -87,7 +99,7 @@
 							<div class="col-sm-6">
 								<div class="input-group">
 									<input type="text" class="form-control text-right"
-										placeholder="0" aria-label="totalkm"
+										placeholder="0" aria-label="totalkm" id="totalkm"
 										aria-describedby="totalkm-addon"> <span
 										class="input-group-addon" id="totalkm-addon">km</span>
 								</div>
@@ -113,7 +125,7 @@
 							<label for="amtperkm" class="col-sm-4 col-form-label">Amount</label>
 							<div class="col-sm-6">
 								<div class="input-group">
-									<span class="input-group-addon">₹</span> <input type="text"
+									<span class="input-group-addon">₹</span> <input type="text" id="amtperkm"
 										class="form-control text-right" placeholder="0"
 										aria-label="amtperkm" aria-describedby="amtperkm-addon">
 									<span class="input-group-addon" id="amtperkm-addon">per
@@ -126,7 +138,7 @@
 							<div class="col-sm-6">
 								<div class="input-group">
 									<span class="input-group-addon">₹</span> <input type="text"
-										class="form-control text-right" placeholder="0"
+										class="form-control text-right" placeholder="0" id="totalamt"
 										aria-label="totalamt">
 								</div>
 							</div>
@@ -136,7 +148,7 @@
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary"
 						data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-success">Save changes</button>
+					<button type="button" class="btn btn-success" onclick="save()">Save changes</button>
 				</div>
 			</div>
 		</div>

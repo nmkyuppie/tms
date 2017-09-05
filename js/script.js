@@ -1,9 +1,10 @@
 /**
  * 
  */
-var pages = ["", "#", "#overview", "#tripdetails", "#vehicleinformation", "#dieseldetails", "#tyredetails", "#driversalarydetails", "#vehiclemaintenence"];
+var pages = ["", "#", "#overview", "#tripdetails", "#vehicledetails", "#dieseldetails", "#tyredetails", "#driversalarydetails", "#vehiclemaintenence"];
 
 $( document ).ready(function() {
+
 	var hash=window.location.hash;
 	load(hash);
 });
