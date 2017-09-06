@@ -17,6 +17,31 @@ var openAddModal = function (){
 	$('#addModal').modal('show');
 }
 
+var calculateTotalKM = function(){ debugger;
+	var closingKM=0;
+	var startingKM=0;
+	if(!isNaN($('#startingkm').val())&&$('#startingkm').val()!=''){
+		startingKM=parseInt($('#startingkm').val());
+	}
+	if(!isNaN($('#closingkm').val())&&$('#closingkm').val()!=''){
+		closingKM=parseInt($('#closingkm').val());
+	}
+
+	var totalKM=0;
+	totalKM=closingKM-startingKM;
+	if($('#startingkm').val()!=''&&$('#closingkm').val()!='')
+		$('#totalkm').val(totalKM);
+}
+
+var calculateTotalAmt = function(){
+
+	if($('#totalkm').val()!=''){
+		if(!isNaN($('#amtperkm').val())&&$('#amtperkm').val()!=''){
+			$('#totalamt').val($('#totalkm').val()*$('#amtperkm').val());
+		}
+	}
+}
+
 var getTripDetails = function(){
 	var tripDetails = Parse.Object.extend("tripdetails");
 	var query = new Parse.Query(tripDetails);
@@ -36,52 +61,52 @@ var getTripDetails = function(){
 var drawTripDetails = function(tripDetails){
 	var htmlContent="";
 	for (var i = 0; i < tripDetails.length; i++) {
-		htmlContent+="<tr>";
-		htmlContent+="<td>";
-		htmlContent+="<button type=\"button\" class=\"btn btn-sm btn-primary float-left\" style=\"margin-right: 10px;\">"+
-					 "<i class=\"material-icons md-18\">mode_edit</i>"+
-					 "</button>";
-		htmlContent+="</td>";
-		htmlContent+="<td>";
-		htmlContent+="<button type=\"button\" class=\"btn btn-sm btn-danger float-left\">"+
-					 "<i class=\"material-icons md-18\">delete</i>"+
-					 "</button>";
-		htmlContent+="</td>";
-		htmlContent+="<td>"+
-						$.datepicker.formatDate('dd M yy', new Date(tripDetails[i].tripdate.iso))
-		htmlContent+="</td>";
-		htmlContent+="</td>";
-		htmlContent+="<td>"+
-		tripDetails[i].route;
-htmlContent+="</td>";
-htmlContent+="<td>"+
-tripDetails[i].startingkm;
-htmlContent+="</td>";
-htmlContent+="<td>"+
-tripDetails[i].closingkm;
-htmlContent+="</td>";
-htmlContent+="<td>"+
-tripDetails[i].totalkm;
-htmlContent+="</td>";
-htmlContent+="<td>"+
-tripDetails[i].passing;
-htmlContent+="</td>";
-htmlContent+="<td>"+
-tripDetails[i].toll;
-htmlContent+="</td>";
-htmlContent+="<td>"+
-tripDetails[i].amtperkm;
-htmlContent+="</td>";
-htmlContent+="<td>"+
-tripDetails[i].totalamt;
-htmlContent+="</td>";
+		htmlContent+="<tr>"+
+		"<td>"+
+		"<button type=\"button\" class=\"btn btn-sm btn-primary float-left\" style=\"margin-right: 10px;\">"+
+		"<i class=\"material-icons md-18\">mode_edit</i>"+
+		"</button>"+
+		"</td>"+
+		"<td>"+
+		"<button type=\"button\" class=\"btn btn-sm btn-danger float-left\">"+
+		"<i class=\"material-icons md-18\">delete</i>"+
+		"</button>"+
+		"</td>"+
+		"<td>"+
+		$.datepicker.formatDate('dd M yy', new Date(tripDetails[i].tripdate.iso))+
+		"</td>"+
+		"</td>"+
+		"<td>"+
+		tripDetails[i].route+
+		"</td>"+
+		"<td>"+
+		tripDetails[i].startingkm+
+		"</td>"+
+		"<td>"+
+		tripDetails[i].closingkm+
+		"</td>"+
+		"<td>"+
+		tripDetails[i].totalkm+
+		"</td>"+
+		"<td>"+
+		tripDetails[i].passing+
+		"</td>"+
+		"<td>"+
+		tripDetails[i].toll+
+		"</td>"+
+		"<td>"+
+		tripDetails[i].amtperkm+
+		"</td>"+
+		"<td>"+
+		tripDetails[i].totalamt+
+		"</td>";
 	}
 	$('#tripDetailsTableBody').html(htmlContent);
 }
 
 var save = function(){
 	var tripdate = new Date($('#datepicker').val());
-	var route = $('#src_route').val()+$('#desc_route').val();
+	var route = $('#srcroute').val()+' to '+$('#destroute').val();
 	var startingKM = parseInt($('#startingkm').val());
 	var closingKM = parseInt($('#closingkm').val());
 	var totalKM = parseInt($('#totalkm').val());
@@ -96,17 +121,17 @@ var save = function(){
 	tripDetails.set("tripdate", tripdate);
 	tripDetails.set("route", route);
 	tripDetails.set("startingkm", startingKM);
-	tripDetails.set("closiingkm", closingKM);
+	tripDetails.set("closingkm", closingKM);
 	tripDetails.set("totalkm", totalKM);
 	tripDetails.set("toll", tollCount);
 	tripDetails.set("passing", passing);
-	tripDetails.set("amperkm", amtPerKM);
+	tripDetails.set("amtperkm", amtPerKM);
 	tripDetails.set("totalamt", totalAmount);
 
 	tripDetails.save(null, {
 		success: function(tripDetails) {
 			// Execute any logic that should take place after the object is saved.
-			alert('New object created with objectId: ' + tripDetails.id);
+			window.location.reload();
 		},
 		error: function(tripDetails, error) {
 			// Execute any logic that should take place if the save fails.

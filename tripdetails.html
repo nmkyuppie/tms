@@ -57,14 +57,14 @@
 						<div class="form-group row">
 							<label for="route" class="col-sm-4 col-form-label">Route</label>
 							<div class="col-sm-6">
-								<input type="text" class="form-control" id="src_route"
+								<input type="text" class="form-control" id="srcroute"
 									placeholder="From">
 							</div>
 						</div>
 						<div class="form-group row">
 							<label for="route" class="col-sm-4 col-form-label"></label>
 							<div class="col-sm-6">
-								<input type="text" class="form-control" id="dest_route"
+								<input type="text" class="form-control" id="destroute"
 									placeholder="To">
 							</div>
 						</div>
@@ -74,7 +74,7 @@
 							<div class="col-sm-6">
 								<div class="input-group">
 									<input type="text" class="form-control text-right"
-										placeholder="0" aria-label="startingkm"
+										placeholder="0" aria-label="startingkm" onchange="calculateTotalKM()"
 										aria-describedby="startingkm-addon" id="startingkm"> <span
 										class="input-group-addon" id="startingkm-addon">km</span>
 								</div>
@@ -86,7 +86,7 @@
 							<div class="col-sm-6">
 								<div class="input-group">
 									<input type="text" class="form-control text-right"
-										placeholder="0" aria-label="closingkm" id="closingkm"
+										placeholder="0" aria-label="closingkm" id="closingkm" onchange="calculateTotalKM()"
 										aria-describedby="closingkm-addon"> <span
 										class="input-group-addon" id="closingkm-addon">km</span>
 								</div>
@@ -98,7 +98,7 @@
 							<div class="col-sm-6">
 								<div class="input-group">
 									<input type="text" class="form-control text-right"
-										placeholder="0" aria-label="totalkm" id="totalkm"
+										placeholder="0" aria-label="totalkm" disabled="disabled" id="totalkm"
 										aria-describedby="totalkm-addon"> <span
 										class="input-group-addon" id="totalkm-addon">km</span>
 								</div>
@@ -124,7 +124,7 @@
 							<label for="amtperkm" class="col-sm-4 col-form-label">Amount</label>
 							<div class="col-sm-6">
 								<div class="input-group">
-									<span class="input-group-addon">₹</span> <input type="text" id="amtperkm"
+									<span class="input-group-addon">₹</span> <input type="text" id="amtperkm" onchange="calculateTotalAmt()"
 										class="form-control text-right" placeholder="0"
 										aria-label="amtperkm" aria-describedby="amtperkm-addon">
 									<span class="input-group-addon" id="amtperkm-addon">per
@@ -136,7 +136,7 @@
 							<label for="totalamt" class="col-sm-4 col-form-label">Total Amount</label>
 							<div class="col-sm-6">
 								<div class="input-group">
-									<span class="input-group-addon">₹</span> <input type="text"
+									<span class="input-group-addon">₹</span> <input type="text" disabled="disabled"
 										class="form-control text-right" placeholder="0" id="totalamt"
 										aria-label="totalamt">
 								</div>
