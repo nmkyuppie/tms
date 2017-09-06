@@ -13,20 +13,19 @@
 <link rel="stylesheet" href="css/jquery-ui.css">
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="js/jquery-1.12.4.js"></script>
-<script src="js/jquery-ui.js"></script>
-<script src="js/popper.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/parse-1.6.14.js"></script>
-<script src="js/tripdetails.js"></script>
+<script type="text/javascript" src="js/jquery-1.12.4.js"></script>
+<script type="text/javascript" src="js/jquery-ui.js"></script>
+<script type="text/javascript" src="js/popper.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/parse-1.6.14.js"></script>
+<script type="text/javascript" src="js/tripdetails.js"></script>
 
 <script>
 	$(function() {
-
 	    Parse.initialize("pR2fH1wY2ooB7FDKCyqPnMQckg9bNzQ8uODCilmt","jyNKGC6Ip94D100blbnBqj7WuUeW0cEEH5tv2Yw3");
 	    Parse.serverURL="https://parseapi.back4app.com/";
-	    
 		$("#datepicker").datepicker();
+	    init();
 	});
 </script>
 </head>
@@ -170,11 +169,10 @@
 					<th>Total ₹</th>
 				</tr>
 			</thead>
-			<tbody>
+			<tbody id="tripDetailsTableBody">
 				<tr>
 					<td>
-						<button type="button" class="btn btn-sm btn-primary float-left"
-							style="margin-right: 10px;">
+						<button type="button" class="btn btn-sm btn-primary float-left" style="margin-right: 10px;">
 							<i class="material-icons md-18">mode_edit</i>
 						</button>
 					</td>
