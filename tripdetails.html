@@ -46,7 +46,7 @@
 				</div>
 				<div class="modal-body">
 					<form class="p-0">
-						<div align="center" class="errorMessage" id="datepickererror">Error</div>
+						<div align="center" class="errorMessage" id="datepickererror"></div>
 						<div class="form-group row">
 							<label for="datepicker" class="col-sm-4 col-form-label">Trip
 								date</label>
@@ -55,7 +55,7 @@
 									placeholder="MM/DD/YYYY">
 							</div>
 						</div>
-						<div align="center" class="errorMessage">Error</div>
+						<div align="center" class="errorMessage" id="srcrouteerror"></div>
 						<div class="form-group row">
 							<label for="route" class="col-sm-4 col-form-label">Route</label>
 							<div class="col-sm-6">
@@ -63,7 +63,7 @@
 									placeholder="From">
 							</div>
 						</div>
-						<div align="center" class="errorMessage">Error</div>
+						<div align="center" class="errorMessage" id="destrouteerror"></div>
 						<div class="form-group row">
 							<label for="route" class="col-sm-4 col-form-label"></label>
 							<div class="col-sm-6">
@@ -71,7 +71,7 @@
 									placeholder="To">
 							</div>
 						</div>
-						<div align="center" class="errorMessage">Error</div>
+						<div align="center" class="errorMessage" id="startingkmerror"></div>
 						<div class="form-group row">
 							<label for="startingkm" class="col-sm-4 col-form-label">Starting
 								km</label>
@@ -84,7 +84,7 @@
 								</div>
 							</div>
 						</div>
-						<div align="center" class="errorMessage">Error</div>
+						<div align="center" class="errorMessage" id="closingkmerror"></div>
 						<div class="form-group row">
 							<label for="closingkm" class="col-sm-4 col-form-label">Closing
 								km</label>
@@ -97,7 +97,7 @@
 								</div>
 							</div>
 						</div>
-						<div align="center" class="errorMessage">Error</div>
+						<div align="center" class="errorMessage" id="totalkmerror"></div>
 						<div class="form-group row">
 							<label for="totalkm" class="col-sm-4 col-form-label">Total
 								km</label>
@@ -110,7 +110,7 @@
 								</div>
 							</div>
 						</div>
-						<div align="center" class="errorMessage">Error</div>
+						<div align="center" class="errorMessage" id="passingerror"></div>
 						<div class="form-group row">
 							<label for="passing" class="col-sm-4 col-form-label">Passing
 							</label>
@@ -119,16 +119,15 @@
 									placeholder="">
 							</div>
 						</div>
-						<div align="center" class="errorMessage"></div>
+						<div align="center" class="errorMessage" id="totalkmerror"></div>
 						<div class="form-group row">
-							<label for="totalkm" class="col-sm-4 col-form-label">Toll
-								count </label>
+							<label for="totalkm" class="col-sm-4 col-form-label">Toll</label>
 							<div class="col-sm-6">
 								<input type="text" class="form-control" id="tollcount"
 									placeholder="0">
 							</div>
 						</div>
-						<div align="center" class="errorMessage">Error</div>
+						<div align="center" class="errorMessage" id="amtperkmerror"></div>
 						<div class="form-group row">
 							<label for="amtperkm" class="col-sm-4 col-form-label">Amount</label>
 							<div class="col-sm-6">
@@ -141,7 +140,7 @@
 								</div>
 							</div>
 						</div>
-						<div align="center" class="errorMessage">Error</div>
+						<div align="center" class="errorMessage" id="totalamterror"></div>
 						<div class="form-group row">
 							<label for="totalamt" class="col-sm-4 col-form-label">Total Amount</label>
 							<div class="col-sm-6">
@@ -157,7 +156,7 @@
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary"
 						data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-success" onclick="save()">Save changes</button>
+					<button id="saveButton" type="button" class="btn btn-success" onclick="save()">Save changes</button>
 				</div>
 			</div>
 		</div>
@@ -180,49 +179,7 @@
 				</tr>
 			</thead>
 			<tbody id="tripDetailsTableBody">
-				<tr>
-					<td>
-						<button type="button" class="btn btn-sm btn-primary float-left" style="margin-right: 10px;">
-							<i class="material-icons md-18">mode_edit</i>
-						</button>
-					</td>
-					<td>
-						<button type="button" class="btn btn-sm btn-danger float-left">
-							<i class="material-icons md-18">delete</i>
-						</button>
-					</td>
-					<td>09/02/2017</td>
-					<td>Chennai to Tirupur</td>
-					<td>28900</td>
-					<td>29430</td>
-					<td>530</td>
-					<td>30</td>
-					<td>20</td>
-					<td>16</td>
-					<td>6000</td>
-				</tr>
-				<tr>
-					<td>
-						<button type="button" class="btn btn-sm btn-primary float-left"
-							style="margin-right: 10px;">
-							<i class="material-icons md-18">mode_edit</i>
-						</button>
-					</td>
-					<td>
-						<button type="button" class="btn btn-sm btn-danger float-left">
-							<i class="material-icons md-18">delete</i>
-						</button>
-					</td>
-					<td>09/04/2017</td>
-					<td>Madurai to Karur</td>
-					<td>29600</td>
-					<td>29850</td>
-					<td>250</td>
-					<td>20</td>
-					<td>0</td>
-					<td>16</td>
-					<td>1000</td>
-				</tr>
+				
 			</tbody>
 		</table>
 	</div>

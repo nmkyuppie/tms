@@ -34,5 +34,6 @@ a:hover{
 	background-color: #e53935;
 	color:#fff;
 	padding:2px;
+	display:none;
 	margin:5px 0;
 }
