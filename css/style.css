@@ -29,3 +29,10 @@ button{
 a:hover{
 	box-shadow:1px 0px 10px rgba(0,0,0,0.1) inset !important;
 }
+
+.errorMessage{
+	background-color: #e53935;
+	color:#fff;
+	padding:2px;
+	margin:5px 0;
+}

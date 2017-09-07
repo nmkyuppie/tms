@@ -22,6 +22,15 @@ var load=function(hash){
 				document.getElementById('mainIFrame').src=hash+'.html';
 				removeActiveCSS();
 				$('#'+hash).addClass('active');
+				if(hash==='overview'){
+					$('#addAction').hide();
+				}else if(hash==='tripdetails'){
+					$('#addAction').show();
+					$('#addAction').text('Add Trip');
+				}else if(hash==='dieseldetails'){
+					$('#addAction').show();
+					$('#addAction').text('Add Diesel Detail');
+				}
 			}
 		}
 		else{

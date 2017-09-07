@@ -105,9 +105,6 @@ var drawTripDetails = function(tripDetails){
 }
 
 var save = function(){
-	$('#datepickererror').hide();
-	$('.errorMessage').hide();
-	return;
 	var tripdate = new Date($('#datepicker').val());
 	var route = $('#srcroute').val()+' to '+$('#destroute').val();
 	var startingKM = parseInt($('#startingkm').val());
