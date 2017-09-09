@@ -16,6 +16,13 @@
 <script src="js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/parse-1.6.14.js"></script>
 <script src="js/script.js"></script>
+<script>
+	$(function() {
+	    Parse.initialize("pR2fH1wY2ooB7FDKCyqPnMQckg9bNzQ8uODCilmt","jyNKGC6Ip94D100blbnBqj7WuUeW0cEEH5tv2Yw3");
+	    Parse.serverURL="https://parseapi.back4app.com/";
+	    validateSession();
+	});
+</script>
 <style type="text/css">
 /*
  * Base structure
@@ -95,6 +102,7 @@ h1 {
 		
         <form class="form-inline my-2 my-lg-0 ml-md-auto d-none d-md-flex">
           <button id="addAction" onclick="openAddModal()" class="btn btn-sm btn-light my-2 my-sm-0" type="submit">Add a trip</button>
+          <button class="btn btn-sm btn-danger my-2 my-sm-0" type="button" onclick="invalidateSession()" style="margin-left:10px;"title="Logout"><i class="material-icons md-18">exit_to_app</i></button>
         </form>
 	</nav>
 	<div class="container-fluid">

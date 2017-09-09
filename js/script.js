@@ -62,3 +62,29 @@ var removeActiveCSS = function(){
 	$('#vehiclemaintenence').removeClass('active');
 }
 
+function validateSession(){
+	var currentUser = Parse.User.current();
+	if (currentUser) {
+		console.log("sucesss user session exists");
+		console.log(JSON.stringify(currentUser));
+	} else {
+		console.log("session (logged out/please login) redirecting to login page");
+		window.location = "index.html";
+	}
+}
+
+function invalidateSession(){
+	console.log("invalidating session");
+	Parse.User.logOut().then(() => {
+		var currentUser = Parse.User.current(); 
+		if(currentUser)
+		{ // this will now be null
+			console.log("some error in invalidatio=ng session");
+		}
+		else
+		{
+			console.log("session logged out redirecting to login page");
+			window.location = "index.html";
+		}
+	});
+}
