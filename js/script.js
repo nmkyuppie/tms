@@ -33,10 +33,13 @@ var load=function(hash){
 				}else if(hash==='vehicledetails'){
 					$('#addAction').show();
 					$('#addAction').text('Add Vehicle Detail');
+				}else if(hash==='driversalarydetails'){
+					$('#addAction').show();
+					$('#addAction').text('Add Driver Salary Detail');
 				}
 			}
 		}
-		else{
+		else{alert(hash)
 			document.getElementById('mainIFrame').src='404.html';
 		}
 	}

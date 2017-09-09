@@ -18,7 +18,7 @@
 <script type="text/javascript" src="js/popper.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/parse-1.6.14.js"></script>
-<script type="text/javascript" src="js/vehicledetails.js"></script>
+<script type="text/javascript" src="js/driversalarydetails.js"></script>
 
 <script>
 	$(function() {
@@ -26,10 +26,8 @@
 	    Parse.serverURL="https://parseapi.back4app.com/";
 
 		if(window.self!==window.top){
-			$("#fcdate").datepicker();
-			$("#insurancedate").datepicker();
-			$('#requestProgressBlue').hide();
-			$('#requestProgressRed').hide();
+			$("#date").datepicker();
+			$("#changedate").datepicker();
 		    init();
 		}
 		else{
@@ -57,7 +55,7 @@
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLongTitle">Add vehicle detail</h5>
+					<h5 class="modal-title" id="exampleModalLongTitle">Add driver salary detail</h5>
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
@@ -65,46 +63,60 @@
 				</div>
 				<div class="modal-body">
 					<form class="p-0">
-						<div align="center" class="errorMessage" id="vehiclenumbererror"></div>
+						<div align="center" class="errorMessage" id="dateerror"></div>
 						<div class="form-group row">
-							<label for="vehiclenumber" class="col-sm-4 col-form-label">Vehicle Number</label>
+							<label for="date" class="col-sm-4 col-form-label">Date</label>
 							<div class="col-sm-6">
-								<input type="text" class="form-control" id="vehiclenumber"
-									placeholder="TN 00 A 0000">
-							</div>
-						</div>
-						<div align="center" class="errorMessage" id="fcdateerror"></div>
-						<div class="form-group row">
-							<label for="fcdate" class="col-sm-4 col-form-label">FC Date</label>
-							<div class="col-sm-6">
-								<input type="text" class="form-control" id="fcdate"
+								<input type="text" class="form-control" id="date"
 									placeholder="MM/DD/YYYY">
 							</div>
 						</div>
-						<div align="center" class="errorMessage" id="insurancedateerror"></div>
+						<div align="center" class="errorMessage" id="drivernameerror"></div>
 						<div class="form-group row">
-							<label for="insurancedate" class="col-sm-4 col-form-label">Insurance Date</label>
+							<label for="drivername" class="col-sm-4 col-form-label">Driver Name</label>
 							<div class="col-sm-6">
-								<input type="text" class="form-control" id="insurancedate"
+								<input type="text" class="form-control" id="drivername"
+									placeholder="Driver Name">
+							</div>
+						</div>
+						<div align="center" class="errorMessage" id="changedateerror"></div>
+						<div class="form-group row">
+							<label for="changedate" class="col-sm-4 col-form-label">Change Date</label>
+							<div class="col-sm-6">
+								<input type="text" class="form-control" id="changedate"
 									placeholder="MM/DD/YYYY">
 							</div>
 						</div>
-						<div align="center" class="errorMessage" id="quartertaxerror"></div>
+						<div align="center" class="errorMessage" id="salaryerror"></div>
 						<div class="form-group row">
-							<label for="quartertax" class="col-sm-4 col-form-label">Quarter Tax</label>
-							<div class="col-sm-6">
-								<input type="text" class="form-control" id="quartertax"
-									placeholder="Quarter Tax">
-							</div>
-						</div>
-						<div align="center" class="errorMessage" id="nptaxerror"></div>
-						<div class="form-group row">
-							<label for="nptax" class="col-sm-4 col-form-label">NP Tax</label>
+							<label for="salary" class="col-sm-4 col-form-label">Salary</label>
 							<div class="col-sm-6">
 								<div class="input-group">
-									<input type="text" class="form-control"
-										placeholder="NP Tax" aria-label="nptax" 
-										aria-describedby="startingkm-addon" id="nptax"> 
+									<span class="input-group-addon">₹</span> <input type="text" disabled="disabled"
+										class="form-control text-right" placeholder="0" id="salary"
+										aria-label="salary">
+								</div>
+							</div>
+						</div>
+						<div align="center" class="errorMessage" id="advanceerror"></div>
+						<div class="form-group row">
+							<label for="advance" class="col-sm-4 col-form-label">Advance</label>
+							<div class="col-sm-6">
+								<div class="input-group">
+									<span class="input-group-addon">₹</span> <input type="text" disabled="disabled"
+										class="form-control text-right" placeholder="0" id="advance"
+										aria-label="advance">
+								</div>
+							</div>
+						</div>
+						<div align="center" class="errorMessage" id="balanceerror"></div>
+						<div class="form-group row">
+							<label for="balance" class="col-sm-4 col-form-label">Closing Balance</label>
+							<div class="col-sm-6">
+								<div class="input-group">
+									<span class="input-group-addon">₹</span> <input type="text" disabled="disabled"
+										class="form-control text-right" placeholder="0" id="balance"
+										aria-label="balance">
 								</div>
 							</div>
 						</div>
@@ -124,14 +136,15 @@
 				<tr>
 					<th></th>
 					<th></th>
-					<th>Vehicle Number</th>
-					<th>FC Date</th>
-					<th>Insurance Date</th>
-					<th>Quarter Tax</th>
-					<th>NP Tax</th>
+					<th>Date</th>
+					<th>Driver Name</th>
+					<th>Advance</th>
+					<th>Driver Change Date</th>
+					<th>Salary</th>
+					<th>Closing Balance</th>
 				</tr>
 			</thead>
-			<tbody id="vehicleDetailsTableBody">
+			<tbody id="driverSalaryDetailsTableBody">
 				
 			</tbody>
 		</table>
