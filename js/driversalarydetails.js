@@ -163,8 +163,8 @@ var putValuesInModal = function(driversalaryDetails){
 	$('#saveButton').attr('onclick', "save('"+driversalaryDetails[0].id+"')");
 	
 	$('#drivername').val(driversalaryDetails[0].get('drivername'));
-	$('#date').val($.datepicker.formatDate('dd/mm/yy', driversalaryDetails[0].get('date')));
-	$('#changedate').val($.datepicker.formatDate('dd/mm/yy', driversalaryDetails[0].get('changedate')));
+	$('#date').val($.datepicker.formatDate('mm/dd/yy', driversalaryDetails[0].get('date')));
+	$('#changedate').val($.datepicker.formatDate('mm/dd/yy', driversalaryDetails[0].get('changedate')));
 	$('#salary').val(driversalaryDetails[0].get('salary'));
 	$('#advance').val(driversalaryDetails[0].get('advance'));
 	$('#balance').val(driversalaryDetails[0].get('balance'));

@@ -218,7 +218,7 @@ var editTrip = function(objectId){
 var putValuesInModal = function(tripDetails){
 	$('#exampleModalLongTitle').html('Edit a Trip');
 	$('#saveButton').attr('onclick', "save('"+tripDetails[0].id+"')");
-	$('#datepicker').val($.datepicker.formatDate('dd/mm/yy', tripDetails[0].get('tripdate')));
+	$('#datepicker').val($.datepicker.formatDate('mm/dd/yy', tripDetails[0].get('tripdate')));
 	$('#srcroute').val(tripDetails[0].get('srcroute'));
 	$('#destroute').val(tripDetails[0].get('destroute'));
 	$('#startingkm').val(tripDetails[0].get('startingkm'));

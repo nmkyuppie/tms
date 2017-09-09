@@ -159,8 +159,8 @@ var putValuesInModal = function(vehicleDetails){
 	var npTax = parseInt($('#nptax').val());
 	
 	$('#vehiclenumber').val(vehicleDetails[0].get('vehiclenumber'));
-	$('#fcdate').val($.datepicker.formatDate('dd/mm/yy', vehicleDetails[0].get('fcdate')));
-	$('#insurancedate').val($.datepicker.formatDate('dd/mm/yy', vehicleDetails[0].get('insurancedate')));
+	$('#fcdate').val($.datepicker.formatDate('mm/dd/yy', vehicleDetails[0].get('fcdate')));
+	$('#insurancedate').val($.datepicker.formatDate('mm/dd/yy', vehicleDetails[0].get('insurancedate')));
 	$('#quartertax').val(vehicleDetails[0].get('quartertax'));
 	$('#nptax').val(vehicleDetails[0].get('nptax'));
 }
