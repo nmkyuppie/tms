@@ -36,7 +36,7 @@ var getTripCount = function(){
 var getFCDate = function(){
 	var VehicleDetails = Parse.Object.extend("vehicledetails");
 	var query = new Parse.Query(VehicleDetails);
-	query.descending("fcdate");
+	query.ascending("fcdate");
 	query.limit(1);
 	query.find({
 	  success: function(vehicledetails) {
@@ -53,7 +53,7 @@ var getFCDate = function(){
 var getInsuranceDate = function(){
 	var VehicleDetails = Parse.Object.extend("vehicledetails");
 	var query = new Parse.Query(VehicleDetails);
-	query.descending("insurancedate");
+	query.ascending("insurancedate");
 	query.limit(1);
 	query.find({
 	  success: function(vehicledetails) {
@@ -89,6 +89,10 @@ var getReminder = function(){
 
 
 var drawReminder = function(reminder){
+	if(reminder.length==0)
+		$('#remindertable').hide();
+	else
+		$('#remindertable').show();
 	var htmlContent="";
 	for (var i = 0; i < reminder.length; i++) {
 		var priority=reminder[i].priority;

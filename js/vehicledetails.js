@@ -25,8 +25,8 @@ var getVehicleDetails = function(){
 
 	var vehicleDetails = Parse.Object.extend("vehicledetails");
 	var query = new Parse.Query(vehicleDetails);
-	query.descending("insurancedate");
-	query.descending("fcdate");
+	query.ascending("insurancedate");
+	query.ascending("fcdate");
 	query.find({
 		success: function(data) {
 			var json=JSON.parse(JSON.stringify(data));
