@@ -82,7 +82,7 @@ function invalidateSession(){
 		var currentUser = Parse.User.current(); 
 		if(currentUser)
 		{ // this will now be null
-			console.log("some error in invalidatio=ng session");
+			console.log("some error in invalidating session");
 		}
 		else
 		{
