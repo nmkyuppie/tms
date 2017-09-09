@@ -25,9 +25,13 @@
 	$(function() {
 	    Parse.initialize("pR2fH1wY2ooB7FDKCyqPnMQckg9bNzQ8uODCilmt","jyNKGC6Ip94D100blbnBqj7WuUeW0cEEH5tv2Yw3");
 	    Parse.serverURL="https://parseapi.back4app.com/";
-	    validateSession();
-		$("#filleddate").datepicker();
-	    init();
+		if(window.self!==window.top){
+			$("#filleddate").datepicker();
+		    init();	
+		}
+		else{
+			window.location="404.html";
+		}
 	});
 </script>
 </head>
