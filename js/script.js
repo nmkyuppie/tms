@@ -30,6 +30,9 @@ var load=function(hash){
 				}else if(hash==='dieseldetails'){
 					$('#addAction').show();
 					$('#addAction').text('Add Diesel Detail');
+				}else if(hash==='vehicledetails'){
+					$('#addAction').show();
+					$('#addAction').text('Add Vehicle Detail');
 				}
 			}
 		}
@@ -52,7 +55,7 @@ var openAddModal = function(){
 var removeActiveCSS = function(){
 	$('#overview').removeClass('active');
 	$('#tripdetails').removeClass('active');
-	$('#vehicleinformation').removeClass('active');
+	$('#vehicledetails').removeClass('active');
 	$('#dieseldetails').removeClass('active');
 	$('#tyredetails').removeClass('active');
 	$('#driversalarydetails').removeClass('active');

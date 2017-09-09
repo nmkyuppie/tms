@@ -24,7 +24,7 @@
 	$(function() {
 	    Parse.initialize("pR2fH1wY2ooB7FDKCyqPnMQckg9bNzQ8uODCilmt","jyNKGC6Ip94D100blbnBqj7WuUeW0cEEH5tv2Yw3");
 	    Parse.serverURL="https://parseapi.back4app.com/";
-		$("#datepicker").datepicker();
+		$("#filleddate").datepicker();
 	    init();
 	});
 </script>
@@ -38,7 +38,7 @@
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLongTitle">Add a trip</h5>
+					<h5 class="modal-title" id="exampleModalLongTitle">Add Diesel Detail</h5>
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
@@ -47,25 +47,18 @@
 				<div class="modal-body">
 					<form class="p-0">
 						<div class="form-group row">
-							<label for="datepicker" class="col-sm-4 col-form-label">Trip
+							<label for="datepicker" class="col-sm-4 col-form-label">Filled
 								date</label>
 							<div class="col-sm-6">
-								<input type="text" class="form-control" id="datepicker"
+								<input type="text" class="form-control" id="filleddate"
 									placeholder="MM/DD/YYYY">
 							</div>
 						</div>
 						<div class="form-group row">
-							<label for="route" class="col-sm-4 col-form-label">Route</label>
+							<label for="bunkplace" class="col-sm-4 col-form-label">Bunk Place</label>
 							<div class="col-sm-6">
-								<input type="text" class="form-control" id="srcroute"
-									placeholder="From">
-							</div>
-						</div>
-						<div class="form-group row">
-							<label for="route" class="col-sm-4 col-form-label"></label>
-							<div class="col-sm-6">
-								<input type="text" class="form-control" id="destroute"
-									placeholder="To">
+								<input type="text" class="form-control" id="bunkplace"
+									placeholder="Bunk Place">
 							</div>
 						</div>
 						<div class="form-group row">
@@ -113,22 +106,26 @@
 							</div>
 						</div>
 						<div class="form-group row">
-							<label for="totalkm" class="col-sm-4 col-form-label">Toll
-								count </label>
+							<label for="mileageperltr" class="col-sm-4 col-form-label">Mileage</label>
 							<div class="col-sm-6">
-								<input type="text" class="form-control" id="tollcount"
-									placeholder="0">
+								<div class="input-group">
+									<span class="input-group-addon">₹</span> <input type="text" id="mileageperltr" 
+										class="form-control text-right" placeholder="0"
+										aria-label="mileageperltr" aria-describedby="mileageperltr-addon">
+									<span class="input-group-addon" id="mileageperltr-addon">per
+										ltr</span>
+								</div>
 							</div>
 						</div>
 						<div class="form-group row">
-							<label for="amtperkm" class="col-sm-4 col-form-label">Amount</label>
+							<label for="priceperltr" class="col-sm-4 col-form-label">Price</label>
 							<div class="col-sm-6">
 								<div class="input-group">
-									<span class="input-group-addon">₹</span> <input type="text" id="amtperkm" onchange="calculateTotalAmt()"
+									<span class="input-group-addon">₹</span> <input type="text" id="priceperltr" onchange="calculateTotalAmt()"
 										class="form-control text-right" placeholder="0"
-										aria-label="amtperkm" aria-describedby="amtperkm-addon">
-									<span class="input-group-addon" id="amtperkm-addon">per
-										km</span>
+										aria-label="priceperltr" aria-describedby="priceperltr-addon">
+									<span class="input-group-addon" id="priceperltr-addon">per
+										ltr</span>
 								</div>
 							</div>
 						</div>

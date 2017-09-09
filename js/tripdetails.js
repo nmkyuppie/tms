@@ -18,24 +18,23 @@ var openAddModal = function (){
 	$('#addModal').modal('show');
 }
 
-var calculateTotalKM = function(){ debugger;
-var closingKM=0;
-var startingKM=0;
-if(!isNaN($('#startingkm').val())&&$('#startingkm').val()!=''){
-	startingKM=parseInt($('#startingkm').val());
-}
-if(!isNaN($('#closingkm').val())&&$('#closingkm').val()!=''){
-	closingKM=parseInt($('#closingkm').val());
-}
+var calculateTotalKM = function(){ 
+	var closingKM=0;
+	var startingKM=0;
+	if(!isNaN($('#startingkm').val())&&$('#startingkm').val()!=''){
+		startingKM=parseInt($('#startingkm').val());
+	}
+	if(!isNaN($('#closingkm').val())&&$('#closingkm').val()!=''){
+		closingKM=parseInt($('#closingkm').val());
+	}
 
-var totalKM=0;
-totalKM=closingKM-startingKM;
-if($('#startingkm').val()!=''&&$('#closingkm').val()!='')
-	$('#totalkm').val(totalKM);
+	var totalKM=0;
+	totalKM=closingKM-startingKM;
+	if($('#startingkm').val()!=''&&$('#closingkm').val()!='')
+		$('#totalkm').val(totalKM);
 }
 
 var calculateTotalAmt = function(){
-
 	if($('#totalkm').val()!=''){
 		if(!isNaN($('#amtperkm').val())&&$('#amtperkm').val()!=''){
 			$('#totalamt').val($('#totalkm').val()*$('#amtperkm').val());
@@ -45,12 +44,12 @@ var calculateTotalAmt = function(){
 
 var getTripDetails = function(){
 	$('#tripDetailsTableBody').html('<tr><td align=\"center\" colspan=\"11\"><div class=\"progress\">'+
-'<div class=\"progress-bar progress-bar-striped progress-bar-animated\" role=\"progressbar\" aria-valuenow=\"100\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: 100%\"></div>'+
-'</div></td></tr>');
+			'<div class=\"progress-bar progress-bar-striped progress-bar-animated\" role=\"progressbar\" aria-valuenow=\"100\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: 100%\"></div>'+
+	'</div></td></tr>');
 
 	var tripDetails = Parse.Object.extend("tripdetails");
 	var query = new Parse.Query(tripDetails);
-
+	query.descending("tripdate");
 	query.find({
 		success: function(data) {
 			var json=JSON.parse(JSON.stringify(data));
@@ -110,7 +109,7 @@ var drawTripDetails = function(tripDetails){
 }
 
 var save = function(objectId){
-	
+
 	$('.errorMessage').hide();
 
 	if($('#datepicker').val()===''){
@@ -169,7 +168,7 @@ var save = function(objectId){
 	var TripDetails = Parse.Object.extend("tripdetails");
 	var tripDetails = new TripDetails();
 
-	
+
 	if(objectId!=''){
 		tripDetails.set("objectId", objectId);
 	}
@@ -183,7 +182,7 @@ var save = function(objectId){
 	tripDetails.set("passing", passing);
 	tripDetails.set("amtperkm", amtPerKM);
 	tripDetails.set("totalamt", totalAmount);
-
+	$('#saveButton').html('Saving...');
 	tripDetails.save(null, {
 		success: function(tripDetails) {
 			// Execute any logic that should take place after the object is saved.
@@ -198,19 +197,16 @@ var save = function(objectId){
 }
 
 var editTrip = function(objectId){
+	$('#requestProgressBlue').show();
 	var TripDetails = Parse.Object.extend("tripdetails");
 	var query = new Parse.Query(TripDetails);
 	query.equalTo("objectId", objectId);
 	query.find({
 		success: function(results) {
-			if(results.length>0){
+			if(results.length>0){	
+				$('#requestProgressBlue').hide();
 				openAddModal();
 				putValuesInModal(results);
-				// Do something with the returned Parse.Object values
-				for (var i = 0; i < results.length; i++) {
-					var object = results[i];
-//					alert(object.id + ' - ' + object.get('playerName'));
-				}
 			}
 		},
 		error: function(error) {
@@ -235,25 +231,27 @@ var putValuesInModal = function(tripDetails){
 }
 
 var deleteTrip = function(objectId){
+	$('#requestProgressRed').show();
 	var tripDetails = Parse.Object.extend("tripdetails");
 	var query = new Parse.Query(tripDetails);
 	query.get(objectId, {
-	  success: function(tripDetails) {
-	    // The object was retrieved successfully.
-		tripDetails.destroy({
-			success: function(myObject) {
-			    window.location.reload();
-			    // The object was deleted from the Parse Cloud.
-			  },
-			  error: function(myObject, error) {
-			    // The delete failed.
-			    // error is a Parse.Error with an error code and message.
-			  }
-		});
-	  },
-	  error: function(object, error) {
-	    // The object was not retrieved successfully.
-	    // error is a Parse.Error with an error code and description.
-	  }
+		success: function(tripDetails) {
+			// The object was retrieved successfully.
+			tripDetails.destroy({
+				success: function(myObject) {
+					$('#requestProgressRed').hide();
+					window.location.reload();
+					// The object was deleted from the Parse Cloud.
+				},
+				error: function(myObject, error) {
+					// The delete failed.
+					// error is a Parse.Error with an error code and message.
+				}
+			});
+		},
+		error: function(object, error) {
+			// The object was not retrieved successfully.
+			// error is a Parse.Error with an error code and description.
+		}
 	}); 
 }
