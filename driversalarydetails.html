@@ -28,6 +28,8 @@
 		if(window.self!==window.top){
 			$("#date").datepicker();
 			$("#changedate").datepicker();
+			$('#requestProgressBlue').hide();
+			$('#requestProgressRed').hide();
 		    init();
 		}
 		else{
@@ -92,8 +94,8 @@
 							<label for="salary" class="col-sm-4 col-form-label">Salary</label>
 							<div class="col-sm-6">
 								<div class="input-group">
-									<span class="input-group-addon">₹</span> <input type="text" disabled="disabled"
-										class="form-control text-right" placeholder="0" id="salary"
+									<span class="input-group-addon">₹</span> <input type="text"
+										class="form-control text-right" placeholder="0" id="salary" onchange="calculateTotalAmt()"
 										aria-label="salary">
 								</div>
 							</div>
@@ -103,8 +105,8 @@
 							<label for="advance" class="col-sm-4 col-form-label">Advance</label>
 							<div class="col-sm-6">
 								<div class="input-group">
-									<span class="input-group-addon">₹</span> <input type="text" disabled="disabled"
-										class="form-control text-right" placeholder="0" id="advance"
+									<span class="input-group-addon">₹</span> <input type="text"
+										class="form-control text-right" placeholder="0" id="advance" onchange="calculateTotalAmt()"
 										aria-label="advance">
 								</div>
 							</div>
@@ -138,13 +140,13 @@
 					<th></th>
 					<th>Date</th>
 					<th>Driver Name</th>
-					<th>Advance</th>
 					<th>Driver Change Date</th>
-					<th>Salary</th>
-					<th>Closing Balance</th>
+					<th>Salary ₹</th>
+					<th>Advance ₹</th>
+					<th>Closing Balance ₹</th>
 				</tr>
 			</thead>
-			<tbody id="driverSalaryDetailsTableBody">
+			<tbody id="driversalaryDetailsTableBody">
 				
 			</tbody>
 		</table>

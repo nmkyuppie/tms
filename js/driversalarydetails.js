@@ -3,7 +3,7 @@
  */
 
 var init = function() {
-	getVehicleDetails();
+	getDriverSalaryDetails();
 }
 
 $(this.window).on('hashchange', function() {
@@ -18,111 +18,120 @@ var openAddModal = function (){
 	$('#addModal').modal('show');
 }
 
-var getVehicleDetails = function(){
-	$('#vehicleDetailsTableBody').html('<tr><td align=\"center\" colspan=\"8\"><div class=\"progress\">'+
+var calculateTotalAmt = function(){
+	if(!isNaN($('#salary').val())&&$('#salary').val()!='' && !isNaN($('#advance').val())&&$('#advance').val()!=''){
+			$('#balance').val($('#salary').val()-$('#advance').val());
+	}
+}
+
+var getDriverSalaryDetails = function(){
+	$('#driversalaryDetailsTableBody').html('<tr><td align=\"center\" colspan=\"8\"><div class=\"progress\">'+
 '<div class=\"progress-bar progress-bar-striped progress-bar-animated\" role=\"progressbar\" aria-valuenow=\"100\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: 100%\"></div>'+
 '</div></td></tr>');
 
-	var vehicleDetails = Parse.Object.extend("vehicledetails");
-	var query = new Parse.Query(vehicleDetails);
-	query.descending("insurancedate");
-	query.descending("fcdate");
+	var driversalaryDetails = Parse.Object.extend("driversalarydetails");
+	var query = new Parse.Query(driversalaryDetails);
+	query.descending("date");
 	query.find({
 		success: function(data) {
 			var json=JSON.parse(JSON.stringify(data));
-			drawVehicleDetails(json);//[0].objectId);
+			drawDriverSalaryDetails(json);//[0].objectId);
 		},
-		error: function(vehicleDetails, error) {
+		error: function(driversalaryDetails, error) {
 			// The object was not refreshed successfully.
 			// error is a Parse.Error with an error code and message.
 		}
 	});
 }
 
-var drawVehicleDetails = function(vehicleDetails){
+var drawDriverSalaryDetails = function(driversalaryDetails){
 	var htmlContent="";
-	for (var i = 0; i < vehicleDetails.length; i++) {
+	for (var i = 0; i < driversalaryDetails.length; i++) {
 		htmlContent+="<tr>"+
 		"<td>"+
-		"<button onclick=\"editVehicle('"+vehicleDetails[i].objectId+"')\" type=\"button\" class=\"btn btn-sm btn-primary float-left\" style=\"margin-right: 10px;\">"+
+		"<button onclick=\"editVehicle('"+driversalaryDetails[i].objectId+"')\" type=\"button\" class=\"btn btn-sm btn-primary float-left\" style=\"margin-right: 10px;\">"+
 		"<i class=\"material-icons md-18\">mode_edit</i>"+
 		"</button>"+
 		"</td>"+
 		"<td>"+
-		"<button onclick=\"deleteVehicle('"+vehicleDetails[i].objectId+"')\" type=\"button\" class=\"btn btn-sm btn-danger float-left\">"+
+		"<button onclick=\"deleteVehicle('"+driversalaryDetails[i].objectId+"')\" type=\"button\" class=\"btn btn-sm btn-danger float-left\">"+
 		"<i class=\"material-icons md-18\">delete</i>"+
 		"</button>"+
 		"</td>"+
 		"<td>"+
-		vehicleDetails[i].vehiclenumber+
-		"</td>"+
-		"</td>"+
-		"<td>"+
-		$.datepicker.formatDate('dd M yy', new Date(vehicleDetails[i].fcdate.iso))+
+		$.datepicker.formatDate('dd M yy', new Date(driversalaryDetails[i].date.iso))+
 		"</td>"+
 		"<td>"+
-		$.datepicker.formatDate('dd M yy', new Date(vehicleDetails[i].insurancedate.iso))+
+		driversalaryDetails[i].drivername+
 		"</td>"+
 		"<td>"+
-		vehicleDetails[i].quartertax+
+		$.datepicker.formatDate('dd M yy', new Date(driversalaryDetails[i].changedate.iso))+
 		"</td>"+
 		"<td>"+
-		vehicleDetails[i].nptax+
+		driversalaryDetails[i].salary+
+		"</td>"+
+		"<td>"+
+		driversalaryDetails[i].advance+
+		"</td>"+
+		"<td>"+
+		driversalaryDetails[i].balance+
 		"</td>";
 	}
-	$('#vehicleDetailsTableBody').html(htmlContent);
+	$('#driversalaryDetailsTableBody').html(htmlContent);
 }
 
 var save = function(objectId){
 	
 	$('.errorMessage').hide();
 
-	if($('#vehiclenumber').val()===''){
-		$('#vehiclenumbererror').text('Please enter vehicle number.');
-		document.getElementById('vehiclenumbererror').style.display='block';
+	if($('#date').val()===''){
+		$('#dateerror').text('Please enter valid date');
+		document.getElementById('dateerror').style.display='block';
 		return;
-	}else if($('#fcdate').val()===''){
-		$('#fcdateerror').text('Please enter valid fc date.');
-		document.getElementById('fcdateerror').style.display='block';
+	}else if($('#drivername').val()===''){
+		$('#drivernameerror').text('Please enter driver name.');
+		document.getElementById('drivernameerror').style.display='block';
 		return;
-	}else if($('#insurancedate').val()===''){
-		$('#insurancedateerror').text('Please enter valid insurance date.');
-		document.getElementById('insurancedateerror').style.display='block';
+	}else if($('#changedate').val()===''){
+		$('#changedateerror').text('Please enter valid change date.');
+		document.getElementById('changedateerror').style.display='block';
 		return;
-	}else if($('#quartertax').val()===''){
-		$('#quartertaxerror').text('Please enter Quarter tax.');
-		document.getElementById('quartertaxerror').style.display='block';
+	}else if($('#salary').val()===''){
+		$('#salaryerror').text('Please enter salary.');
+		document.getElementById('salaryerror').style.display='block';
 		return;
-	}else if($('#nptax').val()===''){
-		$('#nptaxerror').text('Please enter NP tax.');
-		document.getElementById('nptaxerror').style.display='block';
+	}else if($('#advance').val()===''){
+		$('#advanceerror').text('Please enter advance.');
+		document.getElementById('advanceerror').style.display='block';
 		return;
 	}
 
-	var vehicleNumber = $('#vehiclenumber').val();
-	var fcdate = new Date($('#fcdate').val());
-	var insuranceDate = new Date($('#insurancedate').val());
-	var quarterTax = $('#quartertax').val();
-	var npTax = $('#nptax').val();
+	var date = new Date($('#date').val());
+	var driverName = $('#drivername').val();
+	var changeDate = new Date($('#changedate').val());
+	var salary = parseInt($('#salary').val());
+	var advance = parseInt($('#advance').val());
+	var balance = parseInt($('#balance').val());
 
-	var VehicleDetails = Parse.Object.extend("vehicledetails");
-	var vehicleDetails = new VehicleDetails();
+	var DriverSalaryDetails = Parse.Object.extend("driversalarydetails");
+	var driversalaryDetails = new DriverSalaryDetails();
 
 	if(objectId!=''){
-		vehicleDetails.set("objectId", objectId);
+		driversalaryDetails.set("objectId", objectId);
 	}
-	vehicleDetails.set("vehiclenumber", vehicleNumber);
-	vehicleDetails.set("fcdate", fcdate);
-	vehicleDetails.set("insurancedate", insuranceDate);
-	vehicleDetails.set("quartertax", quarterTax);
-	vehicleDetails.set("nptax", npTax);
+	driversalaryDetails.set("date", date);
+	driversalaryDetails.set("drivername", driverName);
+	driversalaryDetails.set("changedate", changeDate);
+	driversalaryDetails.set("salary", salary);
+	driversalaryDetails.set("advance", advance);
+	driversalaryDetails.set("balance", balance);
 	$('#saveButton').html('Saving...');
-	vehicleDetails.save(null, {
-		success: function(vehicleDetails) {
+	driversalaryDetails.save(null, {
+		success: function(driversalaryDetails) {
 			// Execute any logic that should take place after the object is saved.
 			window.location.reload();
 		},
-		error: function(vehicleDetails, error) {
+		error: function(driversalaryDetails, error) {
 			// Execute any logic that should take place if the save fails.
 			// error is a Parse.Error with an error code and message.
 			alert('Failed to create new object, with error code: ' + error.message);
@@ -132,8 +141,8 @@ var save = function(objectId){
 
 var editVehicle = function(objectId){
 	$('#requestProgressBlue').show();
-	var VehicleDetails = Parse.Object.extend("vehicledetails");
-	var query = new Parse.Query(VehicleDetails);
+	var DriverSalaryDetails = Parse.Object.extend("driversalarydetails");
+	var query = new Parse.Query(DriverSalaryDetails);
 	query.equalTo("objectId", objectId);
 	query.find({
 		success: function(results) {
@@ -149,30 +158,26 @@ var editVehicle = function(objectId){
 	});
 }
 
-var putValuesInModal = function(vehicleDetails){
-	$('#exampleModalLongTitle').html('Edit Vehicle Detail');
-	$('#saveButton').attr('onclick', "save('"+vehicleDetails[0].id+"')");
-	var vehicleNumber = $('#vehiclenumber').val();
-	var fcdate = new Date($('#fcdate').val());
-	var insuranceDate = new Date($('#insurancedate').val());
-	var quarterTax = $('#quartertax').val();
-	var npTax = parseInt($('#nptax').val());
+var putValuesInModal = function(driversalaryDetails){
+	$('#exampleModalLongTitle').html('Edit Driver Salary Detail');
+	$('#saveButton').attr('onclick', "save('"+driversalaryDetails[0].id+"')");
 	
-	$('#vehiclenumber').val(vehicleDetails[0].get('vehiclenumber'));
-	$('#fcdate').val($.datepicker.formatDate('dd/mm/yy', vehicleDetails[0].get('fcdate')));
-	$('#insurancedate').val($.datepicker.formatDate('dd/mm/yy', vehicleDetails[0].get('insurancedate')));
-	$('#quartertax').val(vehicleDetails[0].get('quartertax'));
-	$('#nptax').val(vehicleDetails[0].get('nptax'));
+	$('#drivername').val(driversalaryDetails[0].get('drivername'));
+	$('#date').val($.datepicker.formatDate('dd/mm/yy', driversalaryDetails[0].get('date')));
+	$('#changedate').val($.datepicker.formatDate('dd/mm/yy', driversalaryDetails[0].get('changedate')));
+	$('#salary').val(driversalaryDetails[0].get('salary'));
+	$('#advance').val(driversalaryDetails[0].get('advance'));
+	$('#balance').val(driversalaryDetails[0].get('balance'));
 }
 
 var deleteVehicle = function(objectId){
 	$('#requestProgressRed').show();
-	var vehicleDetails = Parse.Object.extend("vehicledetails");
-	var query = new Parse.Query(vehicleDetails);
+	var driversalaryDetails = Parse.Object.extend("driversalarydetails");
+	var query = new Parse.Query(driversalaryDetails);
 	query.get(objectId, {
-	  success: function(vehicleDetails) {
+	  success: function(driversalaryDetails) {
 	    // The object was retrieved successfully.
-		vehicleDetails.destroy({
+		driversalaryDetails.destroy({
 			success: function(myObject) {
 				$('#requestProgressRed').hide();
 			    window.location.reload();
