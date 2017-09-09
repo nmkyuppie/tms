@@ -1,7 +1,7 @@
 /**
  * 
  */
-var pages = ["", "#", "#overview", "#tripdetails", "#vehicledetails", "#dieseldetails", "#tyredetails", "#driversalarydetails", "#vehiclemaintenence"];
+var pages = ["", "#", "#overview", "#tripdetails", "#vehicledetails", "#dieseldetails", "#tyredetails", "#driversalarydetails", "#vehiclemaintenance"];
 
 $( document ).ready(function() {
 
@@ -39,7 +39,7 @@ var load=function(hash){
 				}
 			}
 		}
-		else{alert(hash)
+		else{
 			document.getElementById('mainIFrame').src='404.html';
 		}
 	}
@@ -62,7 +62,7 @@ var removeActiveCSS = function(){
 	$('#dieseldetails').removeClass('active');
 	$('#tyredetails').removeClass('active');
 	$('#driversalarydetails').removeClass('active');
-	$('#vehiclemaintenence').removeClass('active');
+	$('#vehiclemaintenance').removeClass('active');
 }
 
 function validateSession(){
