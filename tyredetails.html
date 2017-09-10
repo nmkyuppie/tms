@@ -75,7 +75,7 @@
 						</div>
 						<div align="center" class="errorMessage" id="tyreerror"></div>
 						<div class="form-group row">
-							<label for="route" class="col-sm-4 col-form-label">Tyre Number</label>
+							<label for="tyrenumber" class="col-sm-4 col-form-label">Tyre Number</label>
 							<div class="col-sm-6">
 								<input type="text" class="form-control" id="tyrenumber"
 									placeholder="Tyre Number">
@@ -84,7 +84,7 @@
 						
 						<div align="center" class="errorMessage" id="makeerror"></div>
 						<div class="form-group row">
-							<label for="startingkm" class="col-sm-4 col-form-label">Tyre Make</label>
+							<label for="tyremake" class="col-sm-4 col-form-label">Tyre Make</label>
 							<div class="col-sm-6">
 								<div class="input-group">
 									<input type="text" class="form-control"
@@ -94,7 +94,7 @@
 						</div>
 						<div align="center" class="errorMessage" id="vehicleerror"></div>
 						<div class="form-group row">
-							<label for="closingkm" class="col-sm-4 col-form-label">Vechile No</label>
+							<label for="closingkm" class="col-sm-4 col-form-label">Vehicle No</label>
 							<div class="col-sm-6">
 								<div class="input-group">
 									<input type="text" class="form-control"
@@ -105,23 +105,28 @@
 						</div>
 						<div align="center" class="errorMessage" id="kmerror"></div>
 						<div class="form-group row">
-							<label for="totalkm" class="col-sm-4 col-form-label">
+							<label for="km" class="col-sm-4 col-form-label">
 								KM</label>
 							<div class="col-sm-6">
 								<div class="input-group">
-									<input type="text" class="form-control"
-										placeholder="0"   id="km"
-										>
+									<input type="text" class="form-control text-right"
+										placeholder="0" aria-label="totalkm"  id="km"
+										aria-describedby="km-addon"> <span
+										class="input-group-addon" id="km-addon">km</span>
 								</div>
 							</div>
 						</div>
 						<div align="center" class="errorMessage" id="runningerror"></div>
 						<div class="form-group row">
-							<label for="passing" class="col-sm-4 col-form-label">Running KM
+							<label for="running" class="col-sm-4 col-form-label">Running KM
 							</label>
 							<div class="col-sm-6">
-								<input type="text" class="form-control" id="running"
-									placeholder="">
+								<div class="input-group">
+									<input type="text" class="form-control text-right"
+										placeholder="0" aria-label="totalkm" id="running"
+										aria-describedby="running-addon"/> <span
+										class="input-group-addon" id="running-addon">km</span>
+										</div>
 							</div>
 						</div>
 						<div align="center" class="errorMessage" id="fittingerror"></div>
@@ -154,7 +159,7 @@
 					<th>Date</th>
 					<th>Tyre Number</th>
 					<th>Tyre Make</th>
-					<th>Vechile No</th>
+					<th>Vehicle Number</th>
 					<th>KM</th>
 					<th>Running</th>
 					<th>Fitting Type</th>

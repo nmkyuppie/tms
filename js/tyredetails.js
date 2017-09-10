@@ -98,15 +98,23 @@ var save = function(objectId){
 		document.getElementById('makeerror').style.display='block';
 		return;
 	}else if($('#vechileno').val()===''){
-		$('#vehicleerror').text('Please enter start vechile no.');
+		$('#vehicleerror').text('Please enter vehicle no.');
 		document.getElementById('vehicleerror').style.display='block';
 		return;
 	}else if($('#km').val()===''){
-		$('#kmerror').text('Please enter  km.');
+		$('#kmerror').text('Please enter km.');
 		document.getElementById('kmerror').style.display='block';
 		return;
+	}else if($('#km').val()<=0){
+		$('#kmerror').text('Please enter valid km.');
+		document.getElementById('kmerror').style.display='block';
+		return;
+	}else if($('#running').val()===''){
+		$('#runningerror').text('Please enter running km.');
+		document.getElementById('runningerror').style.display='block';
+		return;
 	}else if($('#running').val()<=0){
-		$('#runningerror').text('Please enter running.');
+		$('#runningerror').text('Please enter valid running km.');
 		document.getElementById('runningerror').style.display='block';
 		return;
 	}else if($('#fitting').val()===''){
