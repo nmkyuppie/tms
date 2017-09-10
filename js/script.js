@@ -36,6 +36,9 @@ var load=function(hash){
 				}else if(hash==='driversalarydetails'){
 					$('#addAction').show();
 					$('#addAction').text('Add Driver Salary Detail');
+				}else if(hash==='vehiclemaintenance'){
+					$('#addAction').show();
+					$('#addAction').text('Add Vehicle Maintenance Detail');
 				}
 			}
 		}
