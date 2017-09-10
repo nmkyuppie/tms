@@ -30,6 +30,9 @@ var load=function(hash){
 				}else if(hash==='dieseldetails'){
 					$('#addAction').show();
 					$('#addAction').text('Add Diesel Detail');
+				}else if(hash==='tyredetails'){
+					$('#addAction').show();
+					$('#addAction').text('Add Tyre Detail');
 				}else if(hash==='vehicledetails'){
 					$('#addAction').show();
 					$('#addAction').text('Add Vehicle Detail');
