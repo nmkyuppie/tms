@@ -3,7 +3,7 @@
  */
 
 var init = function() {
-	getTripDetails();
+	getDieselDetails();
 }
 
 $(this.window).on('hashchange', function() {
@@ -42,66 +42,69 @@ var calculateTotalAmt = function(){
 	}
 }
 
-var getTripDetails = function(){
-	var tripDetails = Parse.Object.extend("dieseldetails");
-	var query = new Parse.Query(tripDetails);
+var getDieselDetails = function(){
+	$('#dieselDetailsTableBody').html('<tr><td align=\"center\" colspan=\"11\"><div class=\"progress\">'+
+			'<div class=\"progress-bar progress-bar-striped progress-bar-animated\" role=\"progressbar\" aria-valuenow=\"100\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: 100%\"></div>'+
+	'</div></td></tr>');
+	var dieselDetails = Parse.Object.extend("dieseldetails");
+	var query = new Parse.Query(dieselDetails);
 
 	query.find({
 		success: function(data) {
 			var json=JSON.parse(JSON.stringify(data));
-			drawTripDetails(json);//[0].objectId);
+			drawDieselDetails(json);//[0].objectId);
 		},
-		error: function(tripDetails, error) {
+		error: function(dieselDetails, error) {
 			// The object was not refreshed successfully.
 			// error is a Parse.Error with an error code and message.
 		}
 	});
 }
 
-var drawTripDetails = function(tripDetails){
+var drawDieselDetails = function(dieselDetails){
 	var htmlContent="";
-	for (var i = 0; i < tripDetails.length; i++) {
+	for (var i = 0; i < dieselDetails.length; i++) {
 		htmlContent+="<tr>"+
 		"<td>"+
-		"<button onclick=\"editTrip('"+tripDetails[i].objectId+"')\" type=\"button\" class=\"btn btn-sm btn-primary float-left\" style=\"margin-right: 10px;\">"+
+		"<button onclick=\"editDiesel('"+dieselDetails[i].objectId+"')\" type=\"button\" class=\"btn btn-sm btn-primary float-left\" style=\"margin-right: 10px;\">"+
 		"<i class=\"material-icons md-18\">mode_edit</i>"+
 		"</button>"+
 		"</td>"+
 		"<td>"+
-		"<button onclick=\"deleteTrip('"+tripDetails[i].objectId+"')\" type=\"button\" class=\"btn btn-sm btn-danger float-left\">"+
+		"<button onclick=\"deleteDiesel('"+dieselDetails[i].objectId+"')\" type=\"button\" class=\"btn btn-sm btn-danger float-left\">"+
 		"<i class=\"material-icons md-18\">delete</i>"+
 		"</button>"+
 		"</td>"+
 		"<td>"+
-		$.datepicker.formatDate('dd M yy', new Date(tripDetails[i].filleddate.iso))+
+		$.datepicker.formatDate('dd M yy', new Date(dieselDetails[i].filleddate.iso))+
 		"</td>"+
 		"</td>"+
 		"<td>"+
-		tripDetails[i].bunkplace+
+		dieselDetails[i].bunkplace+
 		"</td>"+
 		"<td>"+
-		tripDetails[i].startingkm+
+		dieselDetails[i].startingkm+
 		"</td>"+
 		"<td>"+
-		tripDetails[i].closingkm+
+		dieselDetails[i].closingkm+
 		"</td>"+
 		"<td>"+
-		tripDetails[i].totalkm+
+		dieselDetails[i].totalkm+
 		"</td>"+
 		"<td>"+
-		tripDetails[i].passing+
+		dieselDetails[i].passing+
 		"</td>"+
 		"<td>"+
-		tripDetails[i].mileage+
+		dieselDetails[i].mileage+
 		"</td>"+
 		"<td>"+
-		tripDetails[i].priceperltr+
+		dieselDetails[i].priceperltr+
 		"</td>"+
 		"<td>"+
-		tripDetails[i].totalamt+
+		dieselDetails[i].totalamt+
 		"</td>";
 	}
-	$('#tripDetailsTableBody').html(htmlContent);
+	$('#dieselDetailsTableBody').html(htmlContent);
 }
 
 var save = function(objectId){
@@ -126,8 +129,8 @@ var save = function(objectId){
 		document.getElementById('closingerror').style.display='block';
 		return;
 	}
-	else if($('#totalkm').val()===''){
-		$('#totalerror').text('Please enter starting and closing km.');
+	else if($('#totalkm').val()<=0){
+		$('#totalerror').text('Please enter valid starting and closing km.');
 		document.getElementById('totalerror').style.display='block';
 		return;
 	}
@@ -136,7 +139,7 @@ var save = function(objectId){
 		document.getElementById('passingerror').style.display='block';
 		return;
 	}
-	else if($('#mileage').val()===''){
+	else if($('#mileageperltr').val()===''){
 		$('#mileageerror').text('Please enter mileage.');
 		document.getElementById('mileageerror').style.display='block';
 		return;
@@ -151,9 +154,9 @@ var save = function(objectId){
 		document.getElementById('totalamterror').style.display='block';
 		return;
 	}
-	
+
 	var tripdate = new Date($('#filleddate').val());
-	 var bunkplace=$("#bunkplace").val();
+	var bunkplace=$("#bunkplace").val();
 	var startingKM = parseInt($('#startingkm').val());
 	var closingKM = parseInt($('#closingkm').val());
 	var totalKM = parseInt($('#totalkm').val());
@@ -162,28 +165,28 @@ var save = function(objectId){
 	var amtPerKM = parseInt($('#priceperltr').val());
 	var totalAmount = parseInt($('#totalamt').val());
 
-	var TripDetails = Parse.Object.extend("dieseldetails");
-	var tripDetails = new TripDetails();
+	var DieselDetails = Parse.Object.extend("dieseldetails");
+	var dieselDetails = new DieselDetails();
 	if(objectId!=''){
-		window.alert(objectId);
-		tripDetails.set("objectId", objectId);
+		dieselDetails.set("objectId", objectId);
 	}
-	tripDetails.set("filleddate", tripdate);
-	tripDetails.set("bunkplace",bunkplace);
-	tripDetails.set("startingkm", startingKM);
-	tripDetails.set("closingkm", closingKM);
-	tripDetails.set("totalkm", totalKM);
-	tripDetails.set("passing", passing);
-	tripDetails.set("mileage",mileageperltr);
-	tripDetails.set("priceperltr", amtPerKM);
-	tripDetails.set("totalamt", totalAmount);
+	dieselDetails.set("filleddate", tripdate);
+	dieselDetails.set("bunkplace",bunkplace);
+	dieselDetails.set("startingkm", startingKM);
+	dieselDetails.set("closingkm", closingKM);
+	dieselDetails.set("totalkm", totalKM);
+	dieselDetails.set("passing", passing);
+	dieselDetails.set("mileage",mileageperltr);
+	dieselDetails.set("priceperltr", amtPerKM);
+	dieselDetails.set("totalamt", totalAmount);
+	$('#saveButton').html('Saving...');
 
-	tripDetails.save(null, {
-		success: function(tripDetails) {
+	dieselDetails.save(null, {
+		success: function(dieselDetails) {
 			// Execute any logic that should take place after the object is saved.
 			window.location.reload();
 		},
-		error: function(tripDetails, error) {
+		error: function(dieselDetails, error) {
 			// Execute any logic that should take place if the save fails.
 			// error is a Parse.Error with an error code and message.
 			alert('Failed to create new object, with error code: ' + error.message);
@@ -191,11 +194,10 @@ var save = function(objectId){
 	});
 }
 
-var editTrip = function(objectId){
+var editDiesel = function(objectId){
 	$('#requestProgressBlue').show();
-	//window.alert('test');
-	var TripDetails = Parse.Object.extend("dieseldetails");
-	var query = new Parse.Query(TripDetails);
+	var DieselDetails = Parse.Object.extend("dieseldetails");
+	var query = new Parse.Query(DieselDetails);
 	query.equalTo("objectId", objectId);
 	query.find({
 		success: function(results) {
@@ -211,28 +213,28 @@ var editTrip = function(objectId){
 	});
 }
 
-var putValuesInModal = function(tripDetails){
+var putValuesInModal = function(dieselDetails){
 	$('#exampleModalLongTitle').html('Edit a Fill');
-	$('#saveButton').attr('onclick', "save('"+tripDetails[0].id+"')");
-	$('#filleddate').val($.datepicker.formatDate('dd/mm/yy', tripDetails[0].get('filleddate')));
-	$('#bunkplace').val(tripDetails[0].get('bunkplace'));
-	$('#startingkm').val(tripDetails[0].get('startingkm'));
-	$('#closingkm').val(tripDetails[0].get('closingkm'));
-	$('#totalkm').val(tripDetails[0].get('totalkm'));
-	$('#passing').val(tripDetails[0].get('passing'));
-	$('#mileageperltr').val(tripDetails[0].get('mileage'));
-	$('#priceperltr').val(tripDetails[0].get('priceperltr'));
-	$('#totalamt').val(tripDetails[0].get('totalamt'));
+	$('#saveButton').attr('onclick', "save('"+dieselDetails[0].id+"')");
+	$('#filleddate').val($.datepicker.formatDate('dd/mm/yy', dieselDetails[0].get('filleddate')));
+	$('#bunkplace').val(dieselDetails[0].get('bunkplace'));
+	$('#startingkm').val(dieselDetails[0].get('startingkm'));
+	$('#closingkm').val(dieselDetails[0].get('closingkm'));
+	$('#totalkm').val(dieselDetails[0].get('totalkm'));
+	$('#passing').val(dieselDetails[0].get('passing'));
+	$('#mileageperltr').val(dieselDetails[0].get('mileage'));
+	$('#priceperltr').val(dieselDetails[0].get('priceperltr'));
+	$('#totalamt').val(dieselDetails[0].get('totalamt'));
 }
 
-var deleteTrip = function(objectId){
+var deleteDiesel = function(objectId){
 	$('#requestProgressRed').show();
-	var tripDetails = Parse.Object.extend("dieseldetails");
-	var query = new Parse.Query(tripDetails);
+	var dieselDetails = Parse.Object.extend("dieseldetails");
+	var query = new Parse.Query(dieselDetails);
 	query.get(objectId, {
-		success: function(tripDetails) {
+		success: function(dieselDetails) {
 			// The object was retrieved successfully.
-			tripDetails.destroy({
+			dieselDetails.destroy({
 				success: function(myObject) {
 					$('#requestProgressRed').hide();
 					window.location.reload();
