@@ -44,36 +44,36 @@ var drawTyreDetails = function(tyreDetails){
 	var htmlContent="";
 	for (var i = 0; i < tyreDetails.length; i++) {
 		htmlContent+="<tr>"+
-		"<td>"+
+		"<td class='text-nowrap'>"+
 		"<button onclick=\"editTyre('"+tyreDetails[i].objectId+"')\" type=\"button\" class=\"btn btn-sm btn-primary float-left\" style=\"margin-right: 10px;\">"+
 		"<i class=\"material-icons md-18\">mode_edit</i>"+
 		"</button>"+
 		"</td>"+
-		"<td>"+
+		"<td class='text-nowrap'>"+
 		"<button onclick=\"deleteTyre('"+tyreDetails[i].objectId+"')\" type=\"button\" class=\"btn btn-sm btn-danger float-left\">"+
 		"<i class=\"material-icons md-18\">delete</i>"+
 		"</button>"+
 		"</td>"+
-		"<td>"+
+		"<td class='text-nowrap'>"+
 		$.datepicker.formatDate('dd M yy', new Date(tyreDetails[i].date.iso))+
 		"</td>"+
 		"</td>"+
-		"<td>"+
+		"<td class='text-nowrap'>"+
 		tyreDetails[i].tyrenumber+
 		"</td>"+
-		"<td>"+
+		"<td class='text-nowrap'>"+
 		tyreDetails[i].tyremake+
 		"</td>"+
-		"<td>"+
+		"<td class='text-nowrap'>"+
 		tyreDetails[i].vehiclenumber+
 		"</td>"+
-		"<td>"+
+		"<td class='text-nowrap'>"+
 		tyreDetails[i].km+
 		"</td>"+
-		"<td>"+
+		"<td class='text-nowrap'>"+
 		tyreDetails[i].runningkm+
 		"</td>"+
-		"<td>"+
+		"<td class='text-nowrap'>"+
 		tyreDetails[i].fittingtype+
 		"</td>"
 		

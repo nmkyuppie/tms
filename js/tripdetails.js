@@ -66,42 +66,42 @@ var drawTripDetails = function(tripDetails){
 	var htmlContent="";
 	for (var i = 0; i < tripDetails.length; i++) {
 		htmlContent+="<tr>"+
-		"<td>"+
+		"<td class='text-nowrap'>"+
 		"<button onclick=\"editTrip('"+tripDetails[i].objectId+"')\" type=\"button\" class=\"btn btn-sm btn-primary float-left\" style=\"margin-right: 10px;\">"+
 		"<i class=\"material-icons md-18\">mode_edit</i>"+
 		"</button>"+
 		"</td>"+
-		"<td>"+
+		"<td class='text-nowrap'>"+
 		"<button onclick=\"deleteTrip('"+tripDetails[i].objectId+"')\" type=\"button\" class=\"btn btn-sm btn-danger float-left\">"+
 		"<i class=\"material-icons md-18\">delete</i>"+
 		"</button>"+
 		"</td>"+
-		"<td>"+
+		"<td class='text-nowrap'>"+
 		$.datepicker.formatDate('dd M yy', new Date(tripDetails[i].tripdate.iso))+
 		"</td>"+
 		"</td>"+
-		"<td>"+
+		"<td class='text-nowrap'>"+
 		tripDetails[i].srcroute+' to '+tripDetails[i].destroute+
 		"</td>"+
-		"<td>"+
+		"<td class='text-nowrap'>"+
 		tripDetails[i].startingkm+
 		"</td>"+
-		"<td>"+
+		"<td class='text-nowrap'>"+
 		tripDetails[i].closingkm+
 		"</td>"+
-		"<td>"+
+		"<td class='text-nowrap'>"+
 		tripDetails[i].totalkm+
 		"</td>"+
-		"<td>"+
+		"<td class='text-nowrap'>"+
 		tripDetails[i].passing+
 		"</td>"+
-		"<td>"+
+		"<td class='text-nowrap'>"+
 		tripDetails[i].toll+
 		"</td>"+
-		"<td>"+
+		"<td class='text-nowrap'>"+
 		tripDetails[i].amtperkm+
 		"</td>"+
-		"<td>"+
+		"<td class='text-nowrap'>"+
 		tripDetails[i].totalamt+
 		"</td>";
 	}

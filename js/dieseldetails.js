@@ -65,42 +65,42 @@ var drawDieselDetails = function(dieselDetails){
 	var htmlContent="";
 	for (var i = 0; i < dieselDetails.length; i++) {
 		htmlContent+="<tr>"+
-		"<td>"+
+		"<td class='text-nowrap'>"+
 		"<button onclick=\"editDiesel('"+dieselDetails[i].objectId+"')\" type=\"button\" class=\"btn btn-sm btn-primary float-left\" style=\"margin-right: 10px;\">"+
 		"<i class=\"material-icons md-18\">mode_edit</i>"+
 		"</button>"+
 		"</td>"+
-		"<td>"+
+		"<td class='text-nowrap'>"+
 		"<button onclick=\"deleteDiesel('"+dieselDetails[i].objectId+"')\" type=\"button\" class=\"btn btn-sm btn-danger float-left\">"+
 		"<i class=\"material-icons md-18\">delete</i>"+
 		"</button>"+
 		"</td>"+
-		"<td>"+
+		"<td class='text-nowrap'>"+
 		$.datepicker.formatDate('dd M yy', new Date(dieselDetails[i].filleddate.iso))+
 		"</td>"+
 		"</td>"+
-		"<td>"+
+		"<td class='text-nowrap'>"+
 		dieselDetails[i].bunkplace+
 		"</td>"+
-		"<td>"+
+		"<td class='text-nowrap'>"+
 		dieselDetails[i].startingkm+
 		"</td>"+
-		"<td>"+
+		"<td class='text-nowrap'>"+
 		dieselDetails[i].closingkm+
 		"</td>"+
-		"<td>"+
+		"<td class='text-nowrap'>"+
 		dieselDetails[i].totalkm+
 		"</td>"+
-		"<td>"+
+		"<td class='text-nowrap'>"+
 		dieselDetails[i].passing+
 		"</td>"+
-		"<td>"+
+		"<td class='text-nowrap'>"+
 		dieselDetails[i].mileage+
 		"</td>"+
-		"<td>"+
+		"<td class='text-nowrap'>"+
 		dieselDetails[i].priceperltr+
 		"</td>"+
-		"<td>"+
+		"<td class='text-nowrap'>"+
 		dieselDetails[i].totalamt+
 		"</td>";
 	}

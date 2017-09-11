@@ -15,6 +15,7 @@ $(window).on('hashchange', function() {
 });
 
 var load=function(hash){
+//	$('#addAction').hide();
 	if(typeof hash!== "undefined"){
 		if(pages.indexOf(hash) > -1){
 			if(hash.length>0){
@@ -26,22 +27,22 @@ var load=function(hash){
 					$('#addAction').hide();
 				}else if(hash==='tripdetails'){
 					$('#addAction').show();
-					$('#addAction').text('Add Trip');
+					$('#addAction').html('<i class="material-icons md-18 d-sm-none">add_box</i><span class="d-none d-sm-block"> Add Trip</span>');
 				}else if(hash==='dieseldetails'){
 					$('#addAction').show();
-					$('#addAction').text('Add Diesel Detail');
+					$('#addAction').html('<i class="material-icons md-18 d-sm-none">add_box</i><span class="d-none d-sm-block"> Add Diesel Detail</span>');
 				}else if(hash==='tyredetails'){
 					$('#addAction').show();
-					$('#addAction').text('Add Tyre Detail');
+					$('#addAction').html('<i class="material-icons md-18 d-sm-none">add_box</i><span class="d-none d-sm-block"> Add Tyre Detail</span>');
 				}else if(hash==='vehicledetails'){
 					$('#addAction').show();
-					$('#addAction').text('Add Vehicle Detail');
+					$('#addAction').html('<i class="material-icons md-18 d-sm-none">add_box</i><span class="d-none d-sm-block"> Add Vehicle Detail</span>');
 				}else if(hash==='driversalarydetails'){
 					$('#addAction').show();
-					$('#addAction').text('Add Driver Salary Detail');
+					$('#addAction').html('<i class="material-icons md-18 d-sm-none">add_box</i><span class="d-none d-sm-block"> Add Driver Salary Detail</span>');
 				}else if(hash==='vehiclemaintenance'){
 					$('#addAction').show();
-					$('#addAction').text('Add Vehicle Maintenance Detail');
+					$('#addAction').html('<i class="material-icons md-18 d-sm-none">add_box</i><span class="d-none d-sm-block"> Add Vehicle Maintenance Detail</span>');
 				}
 			}
 		}

@@ -22,6 +22,17 @@
 	    Parse.serverURL="https://parseapi.back4app.com/";
 	    validateSession();
 	});
+	
+	var menuToggler=function(){
+		if($('#sideMenu').hasClass('d-none')){
+			$('#sideMenu').removeClass('d-none');
+			$('#sideMenu').addClass('col-12');
+		}
+		else{
+			$('#sideMenu').addClass('d-none');
+			$('#sideMenu').removeClass('col-12');
+		}
+	}
 </script>
 <style type="text/css">
 /*
@@ -93,36 +104,51 @@ h1 {
 	padding-top: 1.5rem;
 	padding-bottom: 1.5rem;
 }
+
+/* Portrait */
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 568px)
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: portrait) {
+  .mobileFrame{
+  	height:640px;
+  }
+}
 </style>
 </head>
 <body>
 	<nav class="navbar navbar-expand-md bg-light fixed-top navbar-dark"
 		style="background-color: #004d40 !important">
-		<a class="navbar-brand " href="#">Dashboard</a>
-		
-        <form class="form-inline my-2 my-lg-0 ml-md-auto d-none d-md-flex">
-          <button id="addAction" onclick="openAddModal()" class="btn btn-sm btn-primary my-2 my-sm-0" type="submit">Add a trip</button>
-          <button class="btn btn-sm btn-danger my-2 my-sm-0" type="button" onclick="invalidateSession()" style="margin-left:10px;" title="Logout"><i class="material-icons md-18">exit_to_app</i> Logout</button>
+  <button class="navbar-toggler collapsed" type="button" onclick="menuToggler()">
+    <i class="material-icons">list</i>
+  </button>
+		<a class="navbar-brand " href="">Dashboard</a>
+	
+        <form class="form-inline my-lg-0 ml-md-auto d-md-flex float-right">
+          <button id="addAction" onclick="openAddModal()" class="btn btn-sm btn-primary my-2 my-sm-0" type="submit"><i class="material-icons md-18 d-sm-none">add_box</i> <span class="d-none d-sm-block">Add a trip</span></button>
+          <button class="btn btn-sm btn-danger my-2 my-sm-0" type="button" onclick="invalidateSession()" style="margin-left:10px;" title="Logout"><i class="material-icons md-18 d-sm-none">exit_to_app</i> <span class="d-none d-sm-block">Logout</span></button>
         </form>
+        
 	</nav>
 	<div class="container-fluid">
 		<div class="row">
-			<nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
+			<nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar" id="sideMenu">
 				<ul class="nav nav-pills flex-column">
-					<li class="nav-item"><a class="nav-link active" href="#overview" id="overview">Overview
+					<li class="nav-item"><a class="nav-link active" onclick="menuToggler()"  href="#overview" id="overview">Overview
 							<span class="sr-only">(current)</span>
 					</a></li>
-					<li class="nav-item"><a class="nav-link" href="#tripdetails" id="tripdetails">Trip
+					<li class="nav-item"><a class="nav-link" onclick="menuToggler()"  href="#tripdetails" id="tripdetails">Trip
 							Details</a></li>
-					<li class="nav-item"><a class="nav-link" href="#vehicledetails" id="vehicledetails">Vehicle
+					<li class="nav-item"><a class="nav-link" onclick="menuToggler()"  href="#vehicledetails" id="vehicledetails">Vehicle
 							Details</a></li>
-					<li class="nav-item"><a class="nav-link" href="#dieseldetails" id="dieseldetails">Diesel
+					<li class="nav-item"><a class="nav-link" onclick="menuToggler()"  href="#dieseldetails" id="dieseldetails">Diesel
 							Details</a></li>
-					<li class="nav-item"><a class="nav-link" href="#tyredetails" id="tyredetails">Tyre
+					<li class="nav-item"><a class="nav-link" onclick="menuToggler()"  href="#tyredetails" id="tyredetails">Tyre
 							Details</a></li>
-					<li class="nav-item"><a class="nav-link" href="#driversalarydetails" id="driversalarydetails">Driver
+					<li class="nav-item"><a class="nav-link" onclick="menuToggler()"  href="#driversalarydetails" id="driversalarydetails">Driver
 							Salary Details</a></li>
-					<li class="nav-item"><a class="nav-link" href="#vehiclemaintenance" id="vehiclemaintenance">Vehicle
+					<li class="nav-item"><a class="nav-link" onclick="menuToggler()"  href="#vehiclemaintenance" id="vehiclemaintenance">Vehicle
 							Maintenance</a></li>
 				</ul>
 <!-- 				<div class="col-sm-3 col-md-2 d-none d-sm-block fixed-bottom text-light" style="background-color: #004d40 !important">Developed by <a class="text-light" target="blank" href="http://dothtml.in">Dothtml.in</a></div> -->
@@ -131,7 +157,7 @@ h1 {
 	</div>
 	
 	<!-- Have to give height iin pixel -->
-	<div class="embed-responsive embed-responsive-21by9">
+	<div class="embed-responsive  embed-responsive-21by9 embed-responsive-item mobileFrame" id="embedDiv">
 		<iframe id="mainIFrame" name="mainIFrame" class="embed-responsive-item" src="overview.html"></iframe>
 	</div>
 </body>

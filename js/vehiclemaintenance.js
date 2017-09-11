@@ -42,29 +42,29 @@ var drawVehicleMaintenanceDetails = function(vehicleMaintenanceDetails){
 	var htmlContent="";
 	for (var i = 0; i < vehicleMaintenanceDetails.length; i++) {
 		htmlContent+="<tr>"+
-		"<td>"+
+		"<td class='text-nowrap'>"+
 		"<button onclick=\"editVehicleMaintenance('"+vehicleMaintenanceDetails[i].objectId+"')\" type=\"button\" class=\"btn btn-sm btn-primary float-left\" style=\"margin-right: 10px;\">"+
 		"<i class=\"material-icons md-18\">mode_edit</i>"+
 		"</button>"+
 		"</td>"+
-		"<td>"+
+		"<td class='text-nowrap'>"+
 		"<button onclick=\"deleteVehicleMaintenance('"+vehicleMaintenanceDetails[i].objectId+"')\" type=\"button\" class=\"btn btn-sm btn-danger float-left\">"+
 		"<i class=\"material-icons md-18\">delete</i>"+
 		"</button>"+
 		"</td>"+
-		"<td>"+
+		"<td class='text-nowrap'>"+
 		$.datepicker.formatDate('dd M yy', new Date(vehicleMaintenanceDetails[i].date.iso))+
 		"</td>"+
-		"<td>"+
+		"<td class='text-nowrap'>"+
 		vehicleMaintenanceDetails[i].vehiclenumber+
 		"</td>"+
-		"<td>"+
+		"<td class='text-nowrap'>"+
 		vehicleMaintenanceDetails[i].servicetype+
 		"</td>"+
-		"<td>"+
+		"<td class='text-nowrap'>"+
 		vehicleMaintenanceDetails[i].servicefor+
 		"</td>"+
-		"<td>"+
+		"<td class='text-nowrap'>"+
 		vehicleMaintenanceDetails[i].amount+
 		"</td></tr>";
 	}

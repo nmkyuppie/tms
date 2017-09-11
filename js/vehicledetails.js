@@ -43,30 +43,30 @@ var drawVehicleDetails = function(vehicleDetails){
 	var htmlContent="";
 	for (var i = 0; i < vehicleDetails.length; i++) {
 		htmlContent+="<tr>"+
-		"<td>"+
+		"<td class='text-nowrap'>"+
 		"<button onclick=\"editVehicle('"+vehicleDetails[i].objectId+"')\" type=\"button\" class=\"btn btn-sm btn-primary float-left\" style=\"margin-right: 10px;\">"+
 		"<i class=\"material-icons md-18\">mode_edit</i>"+
 		"</button>"+
 		"</td>"+
-		"<td>"+
+		"<td class='text-nowrap'>"+
 		"<button onclick=\"deleteVehicle('"+vehicleDetails[i].objectId+"')\" type=\"button\" class=\"btn btn-sm btn-danger float-left\">"+
 		"<i class=\"material-icons md-18\">delete</i>"+
 		"</button>"+
 		"</td>"+
-		"<td>"+
+		"<td class='text-nowrap'>"+
 		vehicleDetails[i].vehiclenumber+
 		"</td>"+
 		"</td>"+
-		"<td>"+
+		"<td class='text-nowrap'>"+
 		$.datepicker.formatDate('dd M yy', new Date(vehicleDetails[i].fcdate.iso))+
 		"</td>"+
-		"<td>"+
+		"<td class='text-nowrap'>"+
 		$.datepicker.formatDate('dd M yy', new Date(vehicleDetails[i].insurancedate.iso))+
 		"</td>"+
-		"<td>"+
+		"<td class='text-nowrap'>"+
 		vehicleDetails[i].quartertax+
 		"</td>"+
-		"<td>"+
+		"<td class='text-nowrap'>"+
 		vehicleDetails[i].nptax+
 		"</td>";
 	}

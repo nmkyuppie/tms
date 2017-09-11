@@ -106,21 +106,21 @@ var drawReminder = function(reminder){
 			priority="table-light";
 		}
 		htmlContent+="<tr class=\""+priority+"\">"+
-		"<td>"+
+		"<td class='text-nowrap'>"+
 		"<button onclick=\"editReminder('"+reminder[i].objectId+"')\" type=\"button\" class=\"btn btn-sm btn-primary float-left\" style=\"margin-right: 10px;\">"+
 		"<i class=\"material-icons md-18\">mode_edit</i>"+
 		"</button>"+
 		"</td>"+
-		"<td>"+
+		"<td class='text-nowrap'>"+
 		"<button onclick=\"deleteReminder('"+reminder[i].objectId+"')\" type=\"button\" class=\"btn btn-sm btn-danger float-left\">"+
 		"<i class=\"material-icons md-18\">delete</i>"+
 		"</button>"+
 		"</td>"+
-		"<td>"+
+		"<td class='text-nowrap'>"+
 		$.datepicker.formatDate('dd M yy', new Date(reminder[i].remindon.iso))+
 		"</td>"+
 		"</td>"+
-		"<td>"+
+		"<td class='text-nowrap'>"+
 		reminder[i].reminder+
 		"</td>";
 	}
