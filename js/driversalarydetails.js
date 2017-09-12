@@ -24,14 +24,26 @@ var calculateTotalAmt = function(){
 	}
 }
 
-var getDriverSalaryDetails = function(){
+var filter = function(){
+	var driverName=$('#driverNameList :selected').val();
+	if(!!driverName)
+		getDriverSalaryDetails(driverName);
+	else
+		alert('Please select driver name to filter.');
+}
+
+var getDriverSalaryDetails = function(driverName){
 	$('#driversalaryDetailsTableBody').html('<tr><td align=\"center\" colspan=\"8\"><div class=\"progress\">'+
 '<div class=\"progress-bar progress-bar-striped progress-bar-animated\" role=\"progressbar\" aria-valuenow=\"100\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: 100%\"></div>'+
 '</div></td></tr>');
+	
+	getDriverNames();
 
 	var driversalaryDetails = Parse.Object.extend("driversalarydetails");
 	var query = new Parse.Query(driversalaryDetails);
 	query.descending("date");
+	if(!!driverName)
+		query.equalTo("drivername",driverName);
 	query.find({
 		success: function(data) {
 			var json=JSON.parse(JSON.stringify(data));
@@ -42,6 +54,30 @@ var getDriverSalaryDetails = function(){
 			// error is a Parse.Error with an error code and message.
 		}
 	});
+}
+
+var getDriverNames=function(){
+	var driversalaryDetails = Parse.Object.extend("driversalarydetails");
+	var query = new Parse.Query(driversalaryDetails);
+	query.select("drivername");
+	query.find({
+		success: function(data) {
+			var json=JSON.parse(JSON.stringify(data));
+			drawDriverNames(json);//[0].objectId);
+		},
+		error: function(driversalaryDetails, error) {
+			// The object was not refreshed successfully.
+			// error is a Parse.Error with an error code and message.
+		}
+	});
+}
+
+var drawDriverNames=function(json){
+	var htmlContent="<option  value=''>All Drivers</option>";
+	for (var i = 0; i < json.length; i++) {
+		htmlContent+="<option value='"+json[i].drivername+"'>"+json[i].drivername+"</option>";
+	}
+	$('#driverNameList').html(htmlContent);
 }
 
 var drawDriverSalaryDetails = function(driversalaryDetails){
