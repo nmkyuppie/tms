@@ -43,6 +43,14 @@ var calculateTotalAmt = function(){
 	}
 }
 
+var report = function(){
+	$("#tripDetailsTable").table2excel({
+		exclude: ".noExl",
+		name: "TripDetailsDetails",
+		filename: "TripDetailsDetails" //do not include extension
+	});
+}
+
 var constructYearMonthList=function(){
 	var date=new Date();
 	var fromYear=2017;
@@ -86,7 +94,7 @@ var drawVehicleNames =function(json){
 }
 
 var getTripDetails = function(){
-	$('#tripDetailsTableBody').html('<tr><td align=\"center\" colspan=\"11\"><div class=\"progress\">'+
+	$('#tripDetailsTableBody').html('<tr><td align=\"center\" colspan=\"12\"><div class=\"progress\">'+
 			'<div class=\"progress-bar progress-bar-striped progress-bar-animated\" role=\"progressbar\" aria-valuenow=\"100\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: 100%\"></div>'+
 	'</div></td></tr>');
 
@@ -141,12 +149,12 @@ var drawTripDetails = function(tripDetails){
 	for (var i = 0; i < tripDetails.length; i++) {
 		htmlContent+="<tr>"+
 		"<td class='text-nowrap'>"+
-		"<button onclick=\"editTrip('"+tripDetails[i].objectId+"')\" type=\"button\" class=\"btn btn-sm btn-primary float-left\" style=\"margin-right: 10px;\">"+
+		"<button onclick=\"editTrip('"+tripDetails[i].objectId+"')\" type=\"button\" class=\"noExl btn btn-sm btn-primary float-left\" style=\"margin-right: 10px;\">"+
 		"<i class=\"material-icons md-18\">mode_edit</i>"+
 		"</button>"+
 		"</td>"+
 		"<td class='text-nowrap'>"+
-		"<button onclick=\"deleteTrip('"+tripDetails[i].objectId+"')\" type=\"button\" class=\"btn btn-sm btn-danger float-left\">"+
+		"<button onclick=\"deleteTrip('"+tripDetails[i].objectId+"')\" type=\"button\" class=\"noExl btn btn-sm btn-danger float-left\">"+
 		"<i class=\"material-icons md-18\">delete</i>"+
 		"</button>"+
 		"</td>"+
