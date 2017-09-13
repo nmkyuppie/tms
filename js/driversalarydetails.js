@@ -77,6 +77,7 @@ var drawDriverNames=function(json){
 	for (var i = 0; i < json.length; i++) {
 		htmlContent+="<option value='"+json[i].drivername+"'>"+json[i].drivername+"</option>";
 	}
+	$('#drivername').html(htmlContent);
 	$('#driverNameList').html(htmlContent);
 }
 
@@ -124,7 +125,7 @@ var save = function(objectId){
 		$('#dateerror').text('Please enter valid date');
 		document.getElementById('dateerror').style.display='block';
 		return;
-	}else if($('#drivername').val()===''){
+	}else if(driverName=$('#drivername :selected').val()===''){
 		$('#drivernameerror').text('Please enter driver name.');
 		document.getElementById('drivernameerror').style.display='block';
 		return;
@@ -143,7 +144,7 @@ var save = function(objectId){
 	}
 
 	var date = new Date($('#date').val());
-	var driverName = $('#drivername').val();
+	var driverName=$('#drivername :selected').val();
 	var changeDate = new Date($('#changedate').val());
 	var salary = parseInt($('#salary').val());
 	var advance = parseInt($('#advance').val());

@@ -77,8 +77,10 @@
 						<div class="form-group row">
 							<label for="drivername" class="col-sm-4 col-form-label">Driver Name</label>
 							<div class="col-sm-6">
-								<input type="text" class="form-control" id="drivername"
-									placeholder="Driver Name">
+				<select class="custom-select form-control" id="drivername" >
+				</select> 
+<!-- 								<input type="text" class="form-control" id="drivername" -->
+<!-- 									placeholder="Driver Name"> -->
 							</div>
 						</div>
 						<div align="center" class="errorMessage" id="changedateerror"></div>
@@ -136,8 +138,6 @@
 		<div class="form-inline float-right" >
 			<div class="form-group mx-sm-3">
 				<select class="custom-select d-block my-3" id="driverNameList" >
-					<option value="">Driver Name</option>
-					<option value="">Manikandan Nachimuthu</option>
 				</select> 
 			</div>
 			<button class="btn btn-primary" onclick="filter()" style="display:flex;"><i class="material-icons md-18">filter_list</i> <span class="d-none d-sm-block">&nbsp;&nbsp;Filter</span></button>
