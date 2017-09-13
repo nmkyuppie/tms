@@ -57,15 +57,15 @@ var getDriverSalaryDetails = function(driverName){
 }
 
 var getDriverNames=function(){
-	var driversalaryDetails = Parse.Object.extend("driversalarydetails");
-	var query = new Parse.Query(driversalaryDetails);
+	var driverDetails = Parse.Object.extend("driverdetails");
+	var query = new Parse.Query(driverDetails);
 	query.select("drivername");
 	query.find({
 		success: function(data) {
 			var json=JSON.parse(JSON.stringify(data));
 			drawDriverNames(json);//[0].objectId);
 		},
-		error: function(driversalaryDetails, error) {
+		error: function(driverDetails, error) {
 			// The object was not refreshed successfully.
 			// error is a Parse.Error with an error code and message.
 		}
