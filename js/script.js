@@ -1,7 +1,7 @@
 /**
  * 
  */
-var pages = ["", "#", "#overview", "#tripdetails", "#vehicledetails", "#dieseldetails", "#tyredetails", "#driversalarydetails", "#vehiclemaintenance"];
+var pages = ["", "#", "#overview", "#tripdetails", "#vehicledetails", "#driverdetails", "#dieseldetails", "#tyredetails", "#driversalarydetails", "#vehiclemaintenance"];
 
 $( document ).ready(function() {
 
@@ -43,6 +43,9 @@ var load=function(hash){
 				}else if(hash==='vehiclemaintenance'){
 					$('#addAction').show();
 					$('#addAction').html('<i class="material-icons md-18 d-sm-none">add_box</i><span class="d-none d-sm-block"> Add Vehicle Maintenance Detail</span>');
+				}else if(hash==='driverdetails'){
+					$('#addAction').show();
+					$('#addAction').html('<i class="material-icons md-18 d-sm-none">add_box</i><span class="d-none d-sm-block"> Add Driver Detail</span>');
 				}
 			}
 		}
@@ -70,6 +73,7 @@ var removeActiveCSS = function(){
 	$('#tyredetails').removeClass('active');
 	$('#driversalarydetails').removeClass('active');
 	$('#vehiclemaintenance').removeClass('active');
+	$('#driverdetails').removeClass('active');
 }
 
 function validateSession(){
