@@ -79,6 +79,29 @@ var save = function(objectId){
 	}
 	driverDetails.set("drivername", driverName);
 	$('#saveButton').html('Saving...');
+
+	var DriverDetails = Parse.Object.extend("driverdetails");
+	var query = new Parse.Query(DriverDetails);
+	query.equalTo("drivername", driverName);
+	query.find({
+		success: function(results) {
+			if(results.length>0){	
+				$('#saveButton').html('Save Details');
+				$('#drivernameerror').text('Driver name already exists.');
+				document.getElementById('drivernameerror').style.display='block';
+			}
+			else{
+				executeSave(driverDetails);
+			}
+		},
+		error: function(error) {
+			alert("Error: " + error.code + " " + error.message);
+		}
+	});
+	
+}
+
+var executeSave = function(driverDetails){
 	driverDetails.save(null, {
 		success: function(driverDetails) {
 			// Execute any logic that should take place after the object is saved.
