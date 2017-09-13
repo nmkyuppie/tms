@@ -18,6 +18,7 @@
 <script type="text/javascript" src="js/popper.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/parse-1.6.14.js"></script>
+<script type="text/javascript" src="js/jquery.table2excel.js"></script>
 <script type="text/javascript" src="js/driversalarydetails.js"></script>
 
 <script>
@@ -77,8 +78,8 @@
 						<div class="form-group row">
 							<label for="drivername" class="col-sm-4 col-form-label">Driver Name</label>
 							<div class="col-sm-6">
-				<select class="custom-select form-control" id="drivername" >
-				</select> 
+									<select class="custom-select form-control" id="drivername" >
+									</select> 
 <!-- 								<input type="text" class="form-control" id="drivername" -->
 <!-- 									placeholder="Driver Name"> -->
 							</div>
@@ -97,7 +98,7 @@
 							<div class="col-sm-6">
 								<div class="input-group">
 									<span class="input-group-addon">₹</span> <input type="text"
-										class="form-control text-right" placeholder="0" id="salary" onchange="calculateTotalAmt()"
+										class="form-control text-right" placeholder="0" id="salary" 
 										aria-label="salary">
 								</div>
 							</div>
@@ -108,7 +109,7 @@
 							<div class="col-sm-6">
 								<div class="input-group">
 									<span class="input-group-addon">₹</span> <input type="text"
-										class="form-control text-right" placeholder="0" id="advance" onchange="calculateTotalAmt()"
+										class="form-control text-right" placeholder="0" id="advance"
 										aria-label="advance">
 								</div>
 							</div>
@@ -135,14 +136,12 @@
 		</div>
 	</div>
 	<div class="table-responsive">
-		<div class="form-inline float-right" >
-			<div class="form-group mx-sm-3">
-				<select class="custom-select d-block my-3" id="driverNameList" >
-				</select> 
-			</div>
-			<button class="btn btn-primary" onclick="filter()" style="display:flex;"><i class="material-icons md-18">filter_list</i> <span class="d-none d-sm-block">&nbsp;&nbsp;Filter</span></button>
-		</div>
-		<table class="table table-sm table-striped">
+		<section class="row float-right my-3">
+			<select class="custom-select d-block " id="driverNameList" style="margin-right:10px"></select> 
+			<button class="btn btn-primary" onclick="filter()" style="display:flex;margin-right:10px"><i class="material-icons md-18">filter_list</i> <span class="d-none d-sm-block">&nbsp;&nbsp;Filter</span></button>
+			<button class="btn btn-primary" onclick="report()" style="display:flex;margin-right:10px"><i class="material-icons md-18">file_download</i> <span class="d-none d-sm-block">&nbsp;&nbsp;Report</span></button>
+		</section>
+		<table class="table table-sm table-striped" id="driversalaryDetailsTable">
 			<thead>
 				<tr>
 					<th class='text-nowrap'></th>

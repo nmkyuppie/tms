@@ -3,7 +3,8 @@
  */
 
 var init = function() {
-	getTripDetails();
+	getVehicleNumbers();
+	constructYearMonthList();
 }
 
 $(this.window).on('hashchange', function() {
@@ -42,14 +43,87 @@ var calculateTotalAmt = function(){
 	}
 }
 
+var constructYearMonthList=function(){
+	var date=new Date();
+	var fromYear=2017;
+	var toYear=date.getYear()+1900;
+	var  htmlContent;
+	htmlContent+="<option value='0'>All Years</option>";
+	for(var i=fromYear;i<=toYear;i++){
+		htmlContent+="<option value='"+i+"'>"+i+"</option>";
+	}
+	$("#yearList").html(htmlContent);
+	$("#yearList").val(date.getYear()+1900);
+	$("#monthList").val(date.getMonth()+1);
+	getTripDetails();
+}
+
+var getVehicleNumbers = function(){
+		var vehicledetails = Parse.Object.extend("vehicledetails");
+		var query = new Parse.Query(vehicledetails);
+		query.select("vehiclenumber");
+		query.find({
+			success: function(data) {
+				var json=JSON.parse(JSON.stringify(data));
+				drawVehicleNames(json);//[0].objectId);
+			},
+			error: function(driverDetails, error) {
+				// The object was not refreshed successfully.
+				// error is a Parse.Error with an error code and message.
+			}
+		});
+}
+
+var drawVehicleNames =function(json){
+	var htmlContentFilter="<option  value=''>All Vehicles</option>";
+	var htmlContent;
+	for (var i = 0; i < json.length; i++) {
+		htmlContent+="<option value='"+json[i].vehiclenumber+"'>"+json[i].vehiclenumber+"</option>";
+		htmlContentFilter+="<option value='"+json[i].vehiclenumber+"'>"+json[i].vehiclenumber+"</option>";
+	}
+	$('#vehiclenumber').html(htmlContent);
+	$('#vehicleNumberList').html(htmlContentFilter);
+}
+
 var getTripDetails = function(){
 	$('#tripDetailsTableBody').html('<tr><td align=\"center\" colspan=\"11\"><div class=\"progress\">'+
 			'<div class=\"progress-bar progress-bar-striped progress-bar-animated\" role=\"progressbar\" aria-valuenow=\"100\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: 100%\"></div>'+
 	'</div></td></tr>');
 
+	var year, month=0, date;
 	var tripDetails = Parse.Object.extend("tripdetails");
 	var query = new Parse.Query(tripDetails);
 	query.descending("tripdate");
+
+	if(!!$('#vehicleNumberList :selected').val()){
+		query.equalTo("vehiclenumber",$('#vehicleNumberList :selected').val());
+	}
+	if(parseInt($('#yearList :selected').val())!==0){
+		if(parseInt($('#monthList :selected').val())!==0){
+			month=$('#monthList :selected').val();
+		}
+		year=$('#yearList :selected').val();
+		date=new Date();
+		date.setYear(year);
+		if(parseInt($('#monthList :selected').val())!==0){
+			date.setMonth(--month);	
+		}else{
+			date.setMonth(0);
+		}
+		date.setDate(0);
+		query.greaterThan("tripdate",date);
+		date=new Date();
+		if(parseInt($('#monthList :selected').val())!==0){
+			date.setYear(year);	
+			date.setMonth(++month);
+		}else{
+			date.setYear(++year);
+			date.setMonth(0);
+		}
+		date.setDate(1);
+		query.lessThan("tripdate",date);
+	}
+	
 	query.find({
 		success: function(data) {
 			var json=JSON.parse(JSON.stringify(data));
@@ -79,6 +153,8 @@ var drawTripDetails = function(tripDetails){
 		"<td class='text-nowrap'>"+
 		$.datepicker.formatDate('dd M yy', new Date(tripDetails[i].tripdate.iso))+
 		"</td>"+
+		"<td class='text-nowrap'>"+
+		tripDetails[i].vehiclenumber+
 		"</td>"+
 		"<td class='text-nowrap'>"+
 		tripDetails[i].srcroute+' to '+tripDetails[i].destroute+
@@ -154,6 +230,7 @@ var save = function(objectId){
 		return;
 	}
 	var tripdate = new Date($('#datepicker').val());
+	var vehiclenumber=$('#vehiclenumber :selected').val();
 	var srcRoute = $('#srcroute').val()
 	var destRoute = $('#destroute').val();
 	var startingKM = parseInt($('#startingkm').val());
@@ -173,6 +250,7 @@ var save = function(objectId){
 		tripDetails.set("objectId", objectId);
 	}
 	tripDetails.set("tripdate", tripdate);
+	tripDetails.set("vehiclenumber", vehiclenumber);
 	tripDetails.set("srcroute", srcRoute);
 	tripDetails.set("destroute", destRoute);
 	tripDetails.set("startingkm", startingKM);
@@ -219,6 +297,7 @@ var putValuesInModal = function(tripDetails){
 	$('#exampleModalLongTitle').html('Edit a Trip');
 	$('#saveButton').attr('onclick', "save('"+tripDetails[0].id+"')");
 	$('#datepicker').val($.datepicker.formatDate('mm/dd/yy', tripDetails[0].get('tripdate')));
+	$('#vehiclenumber').val(tripDetails[0].get('vehiclenumber'));
 	$('#srcroute').val(tripDetails[0].get('srcroute'));
 	$('#destroute').val(tripDetails[0].get('destroute'));
 	$('#startingkm').val(tripDetails[0].get('startingkm'));

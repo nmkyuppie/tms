@@ -69,7 +69,7 @@ var save = function(objectId){
 		return;
 	}
 
-	var driverName = $('#drivername').val();
+	var driverName = $('#drivername').val().trim();
 
 	var DriverDetails = Parse.Object.extend("driverdetails");
 	var driverDetails = new DriverDetails();

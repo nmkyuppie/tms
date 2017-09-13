@@ -13,6 +13,14 @@ $(this.window).on('hashchange', function() {
 	window.location.hash='';
 });
 
+var report = function(){
+	$("#driversalaryDetailsTable").table2excel({
+		exclude: ".noExl",
+		name: "DriverSalaryDetails",
+		filename: "DriverSalaryDetails" //do not include extension
+	});
+}
+
 var openAddModal = function (){
 	$('#exampleModalLongTitle').html('Add Driver Salary Detail');
 	$('#addModal').modal('show');
@@ -86,12 +94,12 @@ var drawDriverSalaryDetails = function(driversalaryDetails){
 	for (var i = 0; i < driversalaryDetails.length; i++) {
 		htmlContent+="<tr>"+
 		"<td class='text-nowrap'>"+
-		"<button onclick=\"editVehicle('"+driversalaryDetails[i].objectId+"')\" type=\"button\" class=\"btn btn-sm btn-primary float-left\" style=\"margin-right: 10px;\">"+
+		"<button onclick=\"editVehicle('"+driversalaryDetails[i].objectId+"')\" type=\"button\" class=\"noExl btn btn-sm btn-primary float-left\" style=\"margin-right: 10px;\">"+
 		"<i class=\"material-icons md-18\">mode_edit</i>"+
 		"</button>"+
 		"</td>"+
 		"<td class='text-nowrap'>"+
-		"<button onclick=\"deleteVehicle('"+driversalaryDetails[i].objectId+"')\" type=\"button\" class=\"btn btn-sm btn-danger float-left\">"+
+		"<button onclick=\"deleteVehicle('"+driversalaryDetails[i].objectId+"')\" type=\"button\" class=\"noExl btn btn-sm btn-danger float-left\">"+
 		"<i class=\"material-icons md-18\">delete</i>"+
 		"</button>"+
 		"</td>"+
